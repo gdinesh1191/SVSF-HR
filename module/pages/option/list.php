@@ -3,7 +3,7 @@
 
         <div class="py-2">
             <h1 class="text-[18px] sm:text-[20px] font-medium text-[#009333]">
-                Option
+                Options
             </h1>
         </div>
         <div class="relative mb-1 mt-1">
@@ -123,7 +123,7 @@
             </div>
             <div class="mx-2 flex justify-center">
                 <div
-                    class="w-full max-h-[calc(100vh-300px)] max-w-2xl overflow-hidden border border-gray-200 rounded-md">
+                    class="w-full max-h-[calc(100vh-320px)] max-w-2xl overflow-hidden border border-gray-200 rounded-md">
                     <div id="optionTableScroll" class="h-full overflow-y-auto">
                         <table class="w-full text-sm">
                             <thead id="optionTableHead"
