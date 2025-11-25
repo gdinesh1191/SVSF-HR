@@ -392,9 +392,6 @@ const departmentStore = {
   activeRowId: null,
   dropdownEl: null,
   dropdownAnchor: null,
-  toastTimer: null,
-  confirmCallback: null,
-  confirmCancelCallback: null,
   currentType: optionSidebarItems[0]?.id || "",
 };
 
@@ -404,18 +401,7 @@ const departmentEls = {
   nameError: null,
   submitButton: null,
   tbody: null,
-  toast: null,
   tableHead: null,
-  confirmModal: null,
-  confirmTitle: null,
-  confirmMessage: null,
-  confirmConfirmBtn: null,
-  confirmCancelBtn: null,
-  confirmCloseBtn: null,
-  confirmOuterCircle: null,
-  confirmMiddleCircle: null,
-  confirmInnerCircle: null,
-  confirmIcon: null,
   codeSection: null,
   codeInput: null,
   codeError: null,
@@ -450,17 +436,6 @@ function cacheDepartmentElements() {
   departmentEls.tbody = $("#optionTableBody");
   departmentEls.tableHead = $("#optionTableHead");
   departmentEls.tableScroll = $("#optionTableScroll");
-  departmentEls.toast = $("#departmentToast");
-  departmentEls.confirmModal = $("#departmentConfirmModal");
-  departmentEls.confirmTitle = $("#confirmModalTitle");
-  departmentEls.confirmMessage = $("#confirmModalMessage");
-  departmentEls.confirmConfirmBtn = $("#confirmModalConfirm");
-  departmentEls.confirmCancelBtn = $("#confirmModalCancel");
-  departmentEls.confirmCloseBtn = $("#confirmModalCloseBtn");
-  departmentEls.confirmOuterCircle = $("#confirmModalOuterCircle");
-  departmentEls.confirmMiddleCircle = $("#confirmModalMiddleCircle");
-  departmentEls.confirmInnerCircle = $("#confirmModalInnerCircle");
-  departmentEls.confirmIcon = $("#confirmModalIcon");
   departmentEls.codeSection = $("#optionShiftCodeField");
   departmentEls.codeInput = $("#optionCodeInput");
   departmentEls.codeError = $("#optionCodeError");
@@ -529,16 +504,6 @@ function bindDepartmentEvents() {
         closeSubDepartmentCard(true);
       }
     });
-  }
-
-  if (departmentEls.confirmCancelBtn) {
-    departmentEls.confirmCancelBtn.on("click", handleConfirmModalCancel);
-  }
-  if (departmentEls.confirmCloseBtn) {
-    departmentEls.confirmCloseBtn.on("click", handleConfirmModalCancel);
-  }
-  if (departmentEls.confirmConfirmBtn) {
-    departmentEls.confirmConfirmBtn.on("click", handleConfirmModalConfirm);
   }
 }
 
@@ -1037,6 +1002,7 @@ function handleDeleteDepartment(e) {
   const dept = departmentStore.departments.find((item) => item.id === deptId);
   if (!dept) return;
   const label = getCurrentTypeLabel();
+ 
   showConfirmationModal({
     title: `Delete ${label}`,
     message: `Are you sure you want to delete the ${label.toLowerCase()} "${dept.name}"? This action cannot be undone.`,
@@ -1056,6 +1022,7 @@ function handleDeleteDepartment(e) {
       renderDepartmentTable();
     },
   });
+  
 }
 
 function handleStatusToggle() {
@@ -1339,178 +1306,7 @@ function updateSubmitButtonLabel() {
   }
 }
 
-function showToast(message, type = "info") {
-  if (!departmentEls.toast || !departmentEls.toast.length) {
-    return;
-  }
 
-  const styles = {
-    info: {
-      bar: "bg-[#0066CC]",
-      titleColor: "text-[#0066CC]",
-      title: "Info",
-    },
-    success: {
-      bar: "bg-[#009333]",
-      titleColor: "text-[#009333]",
-      title: "Success",
-    },
-    error: {
-      bar: "bg-[#CC0000]",
-      titleColor: "text-[#CC0000]",
-      title: "Error",
-    },
-    warning: {
-      bar: "bg-[#E6A100]",
-      titleColor: "text-[#E6A100]",
-      title: "Warning",
-    },
-  };
-
-  const currentStyle = styles[type] || styles.info;
-
-  const toastContent = `
-    <div class="p-3 rounded-md shadow-lg bg-white relative overflow-hidden">
-      <div class="flex items-start relative">
-        <div class="w-2 h-full ${currentStyle.bar} absolute left-0 top-0 bottom-0 rounded-md"></div>
-        <div class="ml-7 flex-1">
-          <div class="flex justify-between items-start">
-            <h4 class="${currentStyle.titleColor} font-semibold text-[17px]">${currentStyle.title} !</h4>
-            <button type="button" class="text-gray-700 hover:text-black text-lg leading-none" data-action="toast-close">
-              <i class="ri-close-line"></i>
-            </button>
-          </div>
-          <p class="text-gray-600 text-sm leading-snug pr-7">${escapeHtml(
-            message
-          )}</p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  departmentEls.toast
-    .html(toastContent)
-    .removeClass("hidden opacity-0 translate-y-4 pointer-events-none")
-    .addClass("opacity-100 translate-y-0 pointer-events-auto");
-
-  departmentEls.toast.find("[data-action='toast-close']").on("click", () => {
-    hideToast();
-  });
-
-  if (departmentStore.toastTimer) {
-    clearTimeout(departmentStore.toastTimer);
-  }
-
-  departmentStore.toastTimer = setTimeout(() => {
-    hideToast();
-  }, 3000);
-}
-
-function hideToast() {
-  if (!departmentEls.toast || !departmentEls.toast.length) {
-    return;
-  }
-  departmentEls.toast
-    .addClass("opacity-0 translate-y-4 pointer-events-none")
-    .removeClass("opacity-100 translate-y-0 pointer-events-auto");
-
-  setTimeout(() => {
-    departmentEls.toast.addClass("hidden").empty();
-  }, 200);
-}
-
-function showConfirmationModal({
-  title,
-  message,
-  confirmText = "Confirm",
-  cancelText = "Cancel",
-  iconName = "info",
-  onConfirm,
-  onCancel,
-}) {
-  if (!departmentEls.confirmModal) return;
-
-  const styles = {
-    delete: {
-      icon: "ri-delete-bin-line",
-      outer: "bg-[#f9ecec]",
-      middle: "bg-[#f9d6d7]",
-      inner: "bg-[#d4333a]",
-      button: "bg-[#d53635]",
-    },
-    leave: {
-      icon: "ri-logout-box-line",
-      outer: "bg-[#e9f7ec]",
-      middle: "bg-[#c8edd2]",
-      inner: "bg-[#1c8d4b]",
-      button: "bg-green-600",
-    },
-    info: {
-      icon: "ri-information-line",
-      outer: "bg-blue-100",
-      middle: "bg-blue-200",
-      inner: "bg-blue-600",
-      button: "bg-blue-600",
-    },
-  };
-
-  const style = styles[iconName] || styles.info;
-
-  departmentEls.confirmTitle.text(title);
-  departmentEls.confirmMessage.text(message);
-  departmentEls.confirmConfirmBtn
-    .text(confirmText)
-    .attr(
-      "class",
-      `px-6 py-2 w-full cursor-pointer text-sm font-medium text-white rounded-lg ${style.button}`
-    );
-  departmentEls.confirmCancelBtn.text(cancelText);
-
-  departmentEls.confirmOuterCircle.attr(
-    "class",
-    `absolute w-[66px] h-[66px] rounded-full opacity-70 ${style.outer}`
-  );
-  departmentEls.confirmMiddleCircle.attr(
-    "class",
-    `absolute w-[46px] h-[46px] rounded-full opacity-90 ${style.middle}`
-  );
-  departmentEls.confirmInnerCircle.attr(
-    "class",
-    `z-10 w-[30px] h-[30px] rounded-full flex items-center justify-center ${style.inner}`
-  );
-  departmentEls.confirmIcon.attr("class", `${style.icon} text-white`);
-
-  departmentStore.confirmCallback = typeof onConfirm === "function" ? onConfirm : null;
-  departmentStore.confirmCancelCallback =
-    typeof onCancel === "function" ? onCancel : null;
-
-  departmentEls.confirmModal
-    .removeClass("hidden")
-    .addClass("flex");
-}
-
-function hideConfirmationModal() {
-  if (!departmentEls.confirmModal) return;
-  departmentEls.confirmModal.addClass("hidden").removeClass("flex");
-  departmentStore.confirmCallback = null;
-  departmentStore.confirmCancelCallback = null;
-}
-
-function handleConfirmModalConfirm() {
-  const callback = departmentStore.confirmCallback;
-  hideConfirmationModal();
-  if (typeof callback === "function") {
-    callback();
-  }
-}
-
-function handleConfirmModalCancel() {
-  const callback = departmentStore.confirmCancelCallback;
-  hideConfirmationModal();
-  if (typeof callback === "function") {
-    callback();
-  }
-}
 
 function toRoman(num) {
   const romans = [
