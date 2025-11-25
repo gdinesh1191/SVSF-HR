@@ -29,7 +29,12 @@ const policyStore = {
 };
 
 // Tab configuration
-const tabs = ["AuthorizationGroup", "LeavePolicy", "RotationShift", "ShiftPolicy"];
+const tabs = [
+  "AuthorizationGroup",
+  "LeavePolicy",
+  "RotationShift",
+  "ShiftPolicy",
+];
 
 const tabNames = {
   AuthorizationGroup: "Authorization Group",
@@ -63,8 +68,8 @@ $(document).ready(function () {
 function initPolicyModule() {
   cachePolicyElements();
   bindPolicyEvents();
-  setActiveTab("AuthorizationGroup");
   initializeDefaultFields();
+  setPolicyActiveTab("AuthorizationGroup");
 }
 
 function cachePolicyElements() {
@@ -85,14 +90,18 @@ function cachePolicyElements() {
 
 function bindPolicyEvents() {
   // Tab switching
+  console.log("bindPolicyEvents");
   $(document).on("click", ".policy-tab", function (e) {
-    if ($(e.target).hasClass("closePolicyTab") || $(e.target).closest(".closePolicyTab").length) {
-      setActiveTab("AuthorizationGroup");
+    if (
+      $(e.target).hasClass("closePolicyTab") ||
+      $(e.target).closest(".closePolicyTab").length
+    ) {
+      setPolicyActiveTab("AuthorizationGroup");
       return;
     }
     const tab = $(this).data("tab");
     if (tab) {
-      setActiveTab(tab);
+      setPolicyActiveTab(tab);
     }
   });
 
@@ -135,9 +144,9 @@ function bindPolicyEvents() {
   });
 }
 
-function setActiveTab(tab) {
+function setPolicyActiveTab(tab) {
   policyStore.activeTab = tab;
-
+  console.log("setPolicyActiveTab", tab);
   // Update tab styles
   $(".policy-tab")
     .removeClass("bg-[#ebeff3] text-[#384551]")
@@ -169,10 +178,33 @@ function setActiveTab(tab) {
 }
 
 function renderTabContent(tab) {
+  console.log("renderTabContent", tab);
   const contentContainer = $(`#${tab}Content`);
   if (!contentContainer.length) return;
 
-  // Placeholder content - replace with actual component rendering
+  // Render specific tab content
+  if (tab === "AuthorizationGroup") {
+    // AuthorizationGroup component will render itself
+    if (
+      window.authorizationGroupModule &&
+      window.authorizationGroupModule.renderAuthorizationGroup
+    ) {
+      window.authorizationGroupModule.renderAuthorizationGroup();
+    }
+    return;
+  }
+  if (tab === "LeavePolicy") {
+    // LeavePolicy component will render itself
+    if (
+      window.leavePolicyModule &&
+      window.leavePolicyModule.renderLeavePolicy
+    ) {
+      window.leavePolicyModule.renderLeavePolicy();
+    }
+    return;
+  }
+
+  // Placeholder content for other tabs - replace with actual component rendering
   const placeholder = `
     <div class="p-4">
       <h3 class="text-lg font-semibold mb-4">${tabNames[tab]}</h3>
@@ -200,7 +232,9 @@ function toggleSidebar() {
     // Initialize draft with current applied fields or defaults for the active tab
     const applied = policyStore.fieldsByTab[policyStore.activeTab] || [];
     const fallback = policyStore.defaultsByTab[policyStore.activeTab] || [];
-    const source = (applied.length > 0 ? applied : fallback).map((f) => ({ ...f }));
+    const source = (applied.length > 0 ? applied : fallback).map((f) => ({
+      ...f,
+    }));
     policyStore.draftFieldsByTab[policyStore.activeTab] = source;
 
     // Open sidebar
@@ -255,10 +289,16 @@ function renderSidebarContent() {
         visibleFields
           .map(
             (field, index) => `
-        <div class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded cursor-move field-item" data-field-id="${field.id}" data-index="${index}">
-          <i class="ri-drag-move-2-line text-gray-400"></i>
-          <input type="checkbox" class="field-checkbox accent-[#009333] cursor-pointer" data-field-id="${field.id}" checked>
-          <label class="flex-1 text-sm text-gray-700 cursor-pointer">${escapeHtml(field.label)}</label>
+        <div class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded cursor-move field-item" data-field-id="${
+          field.id
+        }" data-index="${index}">
+          <i class="ri-draggable text-gray-400"></i>
+          <input type="checkbox" class="field-checkbox accent-[#009333] cursor-pointer" data-field-id="${
+            field.id
+          }" checked>
+          <label class="flex-1 text-sm text-gray-700 cursor-pointer">${escapeHtml(
+            field.label
+          )}</label>
         </div>
       `
           )
@@ -278,9 +318,17 @@ function renderSidebarContent() {
         hiddenFields
           .map(
             (field) => `
-        <div class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded field-item" data-field-id="${field.id}">
-          <input type="checkbox" class="field-checkbox accent-[#009333] cursor-pointer" data-field-id="${field.id}">
-          <label class="flex-1 text-sm text-gray-700 cursor-pointer">${escapeHtml(field.label)}</label>
+        <div class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded field-item" data-field-id="${
+          field.id
+        }">
+          <i class="ri-draggable text-gray-400"></i>
+
+          <input type="checkbox" class="field-checkbox accent-[#009333] cursor-pointer" data-field-id="${
+            field.id
+          }">
+          <label class="flex-1 text-sm text-gray-700 cursor-pointer">${escapeHtml(
+            field.label
+          )}</label>
         </div>
       `
           )
@@ -290,10 +338,12 @@ function renderSidebarContent() {
   }
 
   // Bind field checkbox events
-  $(document).off("change", ".field-checkbox").on("change", ".field-checkbox", function () {
-    const fieldId = $(this).data("field-id");
-    handleFieldChange(fieldId);
-  });
+  $(document)
+    .off("change", ".field-checkbox")
+    .on("change", ".field-checkbox", function () {
+      const fieldId = $(this).data("field-id");
+      handleFieldChange(fieldId);
+    });
 
   // Make visible fields sortable (using jQuery UI if available, or basic drag)
   if (typeof $.fn.sortable !== "undefined") {
@@ -362,12 +412,18 @@ function handleFieldSearch() {
 // Register columns from child components
 function registerColumns(tab, cols) {
   // Save defaults if not saved yet
-  if (!policyStore.defaultsByTab[tab] || policyStore.defaultsByTab[tab].length === 0) {
+  if (
+    !policyStore.defaultsByTab[tab] ||
+    policyStore.defaultsByTab[tab].length === 0
+  ) {
     policyStore.defaultsByTab[tab] = cols.map((c) => ({ ...c }));
   }
 
   // Initialize fields for tab only if empty, so user customizations persist
-  if (!policyStore.fieldsByTab[tab] || policyStore.fieldsByTab[tab].length === 0) {
+  if (
+    !policyStore.fieldsByTab[tab] ||
+    policyStore.fieldsByTab[tab].length === 0
+  ) {
     policyStore.fieldsByTab[tab] = cols.map((c) => ({ ...c }));
   }
 
@@ -396,19 +452,25 @@ function initializeDefaultFields() {
   // Example default fields - replace with actual defaults from child components
   const defaultFields = {
     AuthorizationGroup: [
-      { id: "name", label: "Name", visible: true },
-      { id: "role", label: "Role", visible: true },
-      { id: "status", label: "Status", visible: true },
+      { id: "groupName", label: "Group Name", visible: true },
+      { id: "level1", label: "Level 1", visible: true },
+      { id: "level2", label: "Level 2", visible: true },
+      { id: "level3", label: "Level 3", visible: true },
+      { id: "approved", label: "Approved", visible: false },
     ],
     LeavePolicy: [
-      { id: "policyName", label: "Policy Name", visible: true },
-      { id: "leaveType", label: "Leave Type", visible: true },
-      { id: "days", label: "Days", visible: true },
+      { id: "groupName", label: "Group Name", visible: true },
+      { id: "level1", label: "Level 1", visible: true },
+      { id: "level2", label: "Level 2", visible: true },
+      { id: "level3", label: "Level 3", visible: true },
+      { id: "approved", label: "Approved", visible: false },
     ],
     RotationShift: [
-      { id: "shiftName", label: "Shift Name", visible: true },
-      { id: "startDate", label: "Start Date", visible: true },
-      { id: "endDate", label: "End Date", visible: true },
+      { id: "groupName", label: "Group Name", visible: true },
+      { id: "level1", label: "Level 1", visible: true },
+      { id: "level2", label: "Level 2", visible: true },
+      { id: "level3", label: "Level 3", visible: true },
+      { id: "approved", label: "Approved", visible: false },
     ],
     ShiftPolicy: [
       { id: "policyName", label: "Policy Name", visible: true },
@@ -429,4 +491,3 @@ window.policyModule = {
   registerColumns,
   getFields: (tab) => policyStore.fieldsByTab[tab] || [],
 };
-

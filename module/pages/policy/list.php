@@ -122,4 +122,10 @@
 </div>
 
 <script src="/module/pages/policy/list.js"></script>
+<script src="/module/pages/policy/authorizationGroup/authorizationGroup.js"></script>
+<script src="/module/pages/policy/authorizationGroup/authorizationModal.js"></script>
+<script src="/module/pages/policy/authorizationGroup/groupModal.js"></script>
 
+<script src="/module/pages/policy/leavePolicy/leavePolicyGroup.js"></script>
+<script src="/module/pages/policy/leavePolicy/leavePolicyModal.js"></script>
+<script src="/module/pages/policy/leavePolicy/leaveGroupModal.js"></script>
