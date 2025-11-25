@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Don't rewrite if the request is for an actual file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect /app/{module}/{type} to index.php?pl={module}&type={type}
+RewriteRule ^app/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?pl=$1&type=$2 [L,QSA]
+
+# Redirect /app/{module} to index.php?pl={module}&type=list (default to list)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^app/([a-zA-Z0-9]+)/?$ index.php?pl=$1&type=list [L,QSA]
+
