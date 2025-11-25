@@ -1,7 +1,26 @@
 
 $(document).ready(function () {
 
-    
+    // Initialize staff date of birth with Flowbite datepicker
+    const staffDobInput = document.getElementById('staffDob');
+    if (staffDobInput && typeof Datepicker !== 'undefined') {
+        const datepicker = new Datepicker(staffDobInput, {
+            format: 'dd/mm/yyyy',
+            maxDate: new Date(),
+            autohide: true,
+            orientation: 'bottom'
+        });
+
+        // Listen for date change
+        staffDobInput.addEventListener('changeDate', function(e) {
+            calculateStaffAge();
+        });
+    }
+
+    // Calculate age when user types date manually
+    $("#staffDob").on('change blur', function() {
+        calculateStaffAge();
+    });
 
     $(".tab-item").click(function () {
        // remove active state from all tabs
@@ -47,6 +66,53 @@ $(function () {
     }
 
     $("#age").val(age);
+  }
+
+  function calculateStaffAge() {
+    let dobStr = $("#staffDob").val().trim();
+    if (!dobStr) {
+        $("#staffAge").val("");
+        return;
+    }
+
+    // Parse dd/mm/yyyy format
+    let parts = dobStr.split('/');
+    if (parts.length !== 3) {
+        $("#staffAge").val("");
+        return;
+    }
+
+    let day = parseInt(parts[0], 10);
+    let month = parseInt(parts[1], 10) - 1; // Month is 0-indexed
+    let year = parseInt(parts[2], 10);
+
+    let birth = new Date(year, month, day);
+    
+    // Validate date
+    if (isNaN(birth.getTime()) || 
+        birth.getDate() !== day || 
+        birth.getMonth() !== month || 
+        birth.getFullYear() !== year) {
+        $("#staffAge").val("");
+        return;
+    }
+
+    let today = new Date();
+    
+    // Check if date is in the future
+    if (birth > today) {
+        $("#staffAge").val("");
+        return;
+    }
+
+    let age = today.getFullYear() - birth.getFullYear();
+    let monthDiff = today.getMonth() - birth.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age--;
+    }
+
+    $("#staffAge").val(age >= 0 ? age : "");
   }
 
 
