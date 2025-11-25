@@ -82,5 +82,7 @@ require 'class/conf.php';
 <!-- Flowbite JS -->
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/datepicker.min.js"></script>
+<script src="/script/confirmationModel.js"></script>
+<script src="/script/toaster.js"></script>
 <script src="/main.js"></script>
 </html>

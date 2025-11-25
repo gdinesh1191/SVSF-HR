@@ -172,5 +172,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
 <script src="/module/pages/option/option.js"></script>
