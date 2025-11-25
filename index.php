@@ -14,6 +14,10 @@ require 'class/conf.php';
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Flowbite CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet">
+    <!-- Flowbite Datepicker CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/datepicker.min.css" rel="stylesheet">
 </head>
 
 <style>
@@ -75,5 +79,8 @@ require 'class/conf.php';
     </div>
 
 </body>
+<!-- Flowbite JS -->
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/datepicker.min.js"></script>
 <script src="/main.js"></script>
 </html>
