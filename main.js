@@ -32,6 +32,10 @@ $(document).ready(function () {
               $("#masterSubMenu").removeClass("hidden").show();
               $("#masterArrow").removeClass("ri-arrow-down-s-line").addClass("ri-arrow-up-s-line");
           }
+          if ($li.closest("#othersSubMenu").length) {
+              $("#othersSubMenu").removeClass("hidden").show();
+              $("#othersArrow").removeClass("ri-arrow-down-s-line").addClass("ri-arrow-up-s-line");
+          }
       }
   });
 

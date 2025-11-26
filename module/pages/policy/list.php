@@ -36,7 +36,7 @@
         </li>
     </ul>
     <div class="flex items-center flex-shrink-0 ml-auto">
-        <button id="openSidebarCustomize" class="btn-sm btn-hover-ct py-1 px-2 text-sm rounded border cursor-pointer border-transparent text-[#384551] hover:bg-[#eceff1] hover:border-[#eceff1]">
+        <button id="openSidebarCustomize" class=" py-1 px-2 text-sm rounded border cursor-pointer border-transparent text-[#384551] hover:bg-[#eceff1] hover:border-[#eceff1]">
             <i class="ri-equalizer-line mr-1"></i>
             <span class="text-sm">Customize Table</span>
         </button>
