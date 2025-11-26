@@ -63,6 +63,17 @@ require 'class/conf.php';
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background-color: #555;
     }
+    .bottom-border-input {
+  border: none; /* Remove all borders */
+  border-bottom: 1px solid #ccc; /* Add a light gray bottom border */
+  padding: 0.25rem 0; /* Add some padding, top/bottom 0.25rem, left/right 0 */
+  transition: border-color 0.3s ease-in-out; /* Smooth transition for focus effect */
+  outline: none; /* Remove default focus outline */
+}
+
+.bottom-border-input:focus {
+  border-bottom-color: #009333; /* Green bottom border on focus */
+}
 </style>
 
 

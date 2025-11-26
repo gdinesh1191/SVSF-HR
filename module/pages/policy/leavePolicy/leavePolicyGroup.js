@@ -10,8 +10,8 @@ const leavePolicyStore = {
   groupDetails: [],
   filters: {},
   localFilters: {},
-  isAuthorizationSidebarOpen: false,
-  selectedStaffForAuthorization: null,
+  isLeavePolicySidebarOpen: false,
+  selectedStaffForLeavePolicy: null,
   searchTerm: "",
   debouncedSearchTerm: "",
   page: 1,
@@ -194,16 +194,16 @@ const leavePolicyGroupEls = {
   selectAllCheckbox: null,
   filterModal: null,
   addGroupModal: null,
-  authorizationModal: null,
+  leavePolicyModal: null,
   footer: null,
 };
 
 // Utility to defer modal initialization until scripts are ready
-function deferAuthorizationModalInit() {
-  if (typeof window.initAuthorizationModal === "function") {
-    window.initAuthorizationModal("#leavePolicyContent");
+function deferLeavePolicyModalInit() {
+  if (typeof window.initLeavePolicyModal === "function") {
+    window.initLeavePolicyModal("#leavePolicyContent");
   } else {
-    setTimeout(deferAuthorizationModalInit, 100);
+    setTimeout(deferLeavePolicyModalInit, 100);
   }
 }
 
@@ -215,14 +215,14 @@ $(document).ready(function () {
 });
 
 function initLeavePolicyGroup() {
-  cacheAuthGroupElements();
-  bindAuthGroupEvents();
+  cacheLeavePolicyGroupElements();
+  bindLeavePolicyGroupEvents();
   registerDefaultColumns();
   renderLeavePolicy();
   fetchLeavePolicy(1);
 }
 
-function cacheAuthGroupElements() {
+function cacheLeavePolicyGroupElements() {
   leavePolicyGroupEls.container = $("#LeavePolicyContent");
   leavePolicyGroupEls.searchInput = $("#leavePolicySearchInput");
   leavePolicyGroupEls.tableBody = $("#leaveGroupTableBody");
@@ -230,11 +230,11 @@ function cacheAuthGroupElements() {
   leavePolicyGroupEls.selectAllCheckbox = $("#leaveGroupSelectAll");
   leavePolicyGroupEls.filterModal = $("#leaveGroupFilterModal");
   leavePolicyGroupEls.addGroupModal = $("#leaveGroupAddGroupModal");
-  leavePolicyGroupEls.authorizationModal = $("#leavePolicyModal");
+  leavePolicyGroupEls.leavePolicyModal = $("#leavePolicyModal");
   leavePolicyGroupEls.footer = $("#leaveGroupFooter");
 }
 
-function bindAuthGroupEvents() {
+function bindLeavePolicyGroupEvents() {
   // Search input with debounce
   if (leavePolicyGroupEls.searchInput && leavePolicyGroupEls.searchInput.length) {
     leavePolicyGroupEls.searchInput.on("input", handleSearchTerm);
@@ -256,8 +256,8 @@ function bindAuthGroupEvents() {
     renderModals();
     // Initialize group modal after render
     setTimeout(() => {
-      if (window.initGroupModal) {
-        window.initGroupModal("#leaveGroupAddGroupContent");
+      if (window.initLeaveGroupModal) {
+        window.initLeaveGroupModal("#leaveGroupAddGroupContent");
       }
     }, 100);
   });
@@ -265,19 +265,19 @@ function bindAuthGroupEvents() {
     leavePolicyStore.isAddGroupOpen = false;
     renderModals();
   });
-  $(document).on("click", "#authGroupAddGroupBackdrop", () => {
+  $(document).on("click", "#leavePolicyAddGroupBackdrop", () => {
     leavePolicyStore.isAddGroupOpen = false;
     renderModals();
   });
 
-  // Authorization modal toggle
+  // Leave Policy modal toggle
   $(document).on("click", "#leavePolicyBackdrop", () => {
-    leavePolicyStore.isAuthorizationSidebarOpen = false;
-    renderAuthorizationSidebar();
+    leavePolicyStore.isLeavePolicySidebarOpen = false;
+    renderLeavePolicySidebar();
   });
   $(document).on("click", "#leavePolicyClose", () => {
-    leavePolicyStore.isAuthorizationSidebarOpen = false;
-    renderAuthorizationSidebar();
+    leavePolicyStore.isLeavePolicySidebarOpen = false;
+    renderLeavePolicySidebar();
   });
 
   // Row checkbox
@@ -289,13 +289,13 @@ function bindAuthGroupEvents() {
   // Edit icon click
   $(document).on("click", ".leave-group-edit-icon", function () {
     const id = parseInt($(this).data("id"));
-    handleAuthorizationEdit(id);
+    handleLeavePolicyEdit(id);
   });
 
   // Group name click
   $(document).on("click", ".leave-group-name-cell", function () {
     const id = parseInt($(this).data("id"));
-    handleAuthorizationEdit(id);
+    handleLeavePolicyEdit(id);
   });
 
   // Entire row click (except checkbox)
@@ -306,7 +306,7 @@ function bindAuthGroupEvents() {
     const attrId = $(this).attr("data-id");
     const id = attrId ? parseInt(attrId, 10) : NaN;
     if (!Number.isNaN(id)) {
-      handleAuthorizationEdit(id);
+      handleLeavePolicyEdit(id);
     }
   });
 
@@ -425,17 +425,17 @@ function handleCheckboxChange(id) {
   updateSelectAllCheckbox();
 }
 
-function handleAuthorizationEdit(staffId) {
+function handleLeavePolicyEdit(staffId) {
   console.log(staffId);
   const staffMember = leavePolicyStore.groupDetails.find(
     (staff) => staff.id === staffId
   );
   if (staffMember) {
-    leavePolicyStore.selectedStaffForAuthorization = staffMember;
-    leavePolicyStore.isAuthorizationSidebarOpen = true;
-    renderAuthorizationSidebar();
-    // Initialize authorization modal after render
-    setTimeout(deferAuthorizationModalInit, 100);
+    leavePolicyStore.selectedStaffForLeavePolicy = staffMember;
+    leavePolicyStore.isLeavePolicySidebarOpen = true;
+    renderLeavePolicySidebar();
+    // Initialize leave policy modal after render
+    setTimeout(deferLeavePolicyModalInit, 100);
   }
 }
 
@@ -545,7 +545,7 @@ async function fetchLeavePolicy(page = 1) {
     leavePolicyStore.hasMore = offset + limit < totalRecords;
     leavePolicyStore.total = totalRecords;
   } catch (err) {
-    console.error("Error fetching authorization group:", err);
+    console.error("Error fetching leave policy group:", err);
     leavePolicyStore.hasMore = false;
   } finally {
     leavePolicyStore.loading = false;
@@ -672,7 +672,7 @@ function renderLeavePolicy() {
   `;
 
   leavePolicyGroupEls.container.html(html);
-  cacheAuthGroupElements();
+  cacheLeavePolicyGroupElements();
   renderTableHead();
   renderTable();
   renderModals();
@@ -1000,8 +1000,8 @@ function renderAddGroupModal() {
           ? "opacity-100"
           : "opacity-0 pointer-events-none"
       }">
-        <div id="authGroupAddGroupBackdrop" class="fixed inset-0 bg-[rgba(0,0,0,0.5)]"></div>
-        <div class="auth-group-modal-panel relative w-80 mt-[5.4rem] mb-[0.15rem] rounded-tl-[0.375rem] rounded-bl-[0.375rem] bg-white shadow-[0_4px_16px_#27313a66] transform transition-transform duration-300 flex flex-col ${
+        <div id="leavePolicyAddGroupBackdrop" class="fixed inset-0 bg-[rgba(0,0,0,0.5)]"></div>
+        <div class="leave-policy-group-modal-panel relative w-80 mt-[5.4rem] mb-[0.15rem] rounded-tl-[0.375rem] rounded-bl-[0.375rem] bg-white shadow-[0_4px_16px_#27313a66] transform transition-transform duration-300 flex flex-col ${
           leavePolicyStore.isAddGroupOpen ? "translate-x-0" : "translate-x-full"
         }">
           <div class="py-[0.5rem] px-[0.75rem] border-b border-[#dee2e6] flex justify-between items-center text-sm text-[#12344d]">
@@ -1027,31 +1027,30 @@ function renderAddGroupModal() {
       .toggleClass("opacity-100", leavePolicyStore.isAddGroupOpen)
       .toggleClass("opacity-0 pointer-events-none", !leavePolicyStore.isAddGroupOpen);
     leavePolicyGroupEls.addGroupModal
-      .find(".auth-group-modal-panel")
+      .find(".leave-policy-group-modal-panel")
       .toggleClass("translate-x-0", leavePolicyStore.isAddGroupOpen)
       .toggleClass("translate-x-full", !leavePolicyStore.isAddGroupOpen);
   }
 }
 
-function renderAuthorizationSidebar() {
-  console.log("renderAuthorizationSidebar", leavePolicyStore.selectedStaffForAuthorization);
-  if (!leavePolicyGroupEls.authorizationModal || !leavePolicyGroupEls.authorizationModal.length) {
+function renderLeavePolicySidebar() {
+  if (!leavePolicyGroupEls.leavePolicyModal || !leavePolicyGroupEls.leavePolicyModal.length) {
     const modalHtml = `
       <div id="leavePolicyModal" class="fixed inset-0 z-50 flex justify-end transition-opacity duration-300 ${
-        leavePolicyStore.isAuthorizationSidebarOpen
+        leavePolicyStore.isLeavePolicySidebarOpen
           ? "opacity-100"
           : "opacity-0 pointer-events-none"
       }">
         <div id="leavePolicyBackdrop" class="fixed inset-0 bg-[rgba(0,0,0,0.5)]"></div>
-        <div class="auth-authorization-modal-panel relative w-[750px] mt-[5.4rem] mb-[0.15rem] rounded-tl-[0.375rem] rounded-bl-[0.375rem] bg-white shadow-[0_4px_16px_#27313a66] transform transition-transform duration-300 flex flex-col ease-in-out ${
-          leavePolicyStore.isAuthorizationSidebarOpen
+        <div class="leave-policy-modal-panel relative w-[750px] mt-[5.4rem] mb-[0.15rem] rounded-tl-[0.375rem] rounded-bl-[0.375rem] bg-white shadow-[0_4px_16px_#27313a66] transform transition-transform duration-300 flex flex-col ease-in-out ${
+          leavePolicyStore.isLeavePolicySidebarOpen
             ? "translate-x-0"
             : "translate-x-full"
         }">
           <div class="flex justify-between items-center px-4 py-3 border-b text-[#12344d] border-gray-200">
             <h5 class="text-lg">
-              Authorization Level for ${escapeHtml(
-                leavePolicyStore.selectedStaffForAuthorization?.groupName || ""
+              Leave Policy Level for ${escapeHtml(
+                leavePolicyStore.selectedStaffForLeavePolicy?.groupName || ""
               )}
             </h5>
             <button id="leavePolicyClose" class="cursor-pointer">
@@ -1063,24 +1062,24 @@ function renderAuthorizationSidebar() {
       </div>
     `;
     $("body").append(modalHtml);
-    leavePolicyGroupEls.authorizationModal = $("#leavePolicyModal");
-    // Initialize authorization modal after a short delay to ensure DOM is ready
-    setTimeout(deferAuthorizationModalInit, 50);
+    leavePolicyGroupEls.leavePolicyModal = $("#leavePolicyModal");
+    // Initialize leave policy modal after a short delay to ensure DOM is ready
+    setTimeout(deferLeavePolicyModalInit, 50);
   } else {
-    leavePolicyGroupEls.authorizationModal
-      .toggleClass("opacity-100", leavePolicyStore.isAuthorizationSidebarOpen)
-      .toggleClass("opacity-0 pointer-events-none", !leavePolicyStore.isAuthorizationSidebarOpen);
-    leavePolicyGroupEls.authorizationModal
-      .find(".auth-authorization-modal-panel")
-      .toggleClass("translate-x-0", leavePolicyStore.isAuthorizationSidebarOpen)
-      .toggleClass("translate-x-full", !leavePolicyStore.isAuthorizationSidebarOpen);
+    leavePolicyGroupEls.leavePolicyModal
+      .toggleClass("opacity-100", leavePolicyStore.isLeavePolicySidebarOpen)
+      .toggleClass("opacity-0 pointer-events-none", !leavePolicyStore.isLeavePolicySidebarOpen);
+    leavePolicyGroupEls.leavePolicyModal
+      .find(".leave-policy-modal-panel")
+      .toggleClass("translate-x-0", leavePolicyStore.isLeavePolicySidebarOpen)
+      .toggleClass("translate-x-full", !leavePolicyStore.isLeavePolicySidebarOpen);
 
     // Update header text
-    if (leavePolicyStore.selectedStaffForAuthorization) {
-      leavePolicyGroupEls.authorizationModal
+    if (leavePolicyStore.selectedStaffForLeavePolicy) {
+      leavePolicyGroupEls.leavePolicyModal
         .find("h5")
         .text(
-          `Authorization Level for ${leavePolicyStore.selectedStaffForAuthorization.groupName || ""}`
+          `Leave Policy Level for ${leavePolicyStore.selectedStaffForLeavePolicy.groupName || ""}`
         );
     }
   }
