@@ -127,7 +127,7 @@
         <button
           id="printBtn"
           type="button"
-          class="btn-sm btn-hover text-[#009333] hover:bg-green-100 inline-flex items-center px-3 py-1 text-sm rounded"
+          class="btn-sm !border-[#cfd7df] text-[#12375d] bg-white hover:bg-[#ebeff3] text-sm text-[#009333] hover:bg-green-100 inline-flex items-center px-3 py-1 text-sm rounded"
         >
           <i class="ri-printer-line mr-1"></i>
           Print
@@ -135,7 +135,7 @@
         <button
           id="downloadBtn"
           type="button"
-          class="btn-sm btn-hover text-[#009333] hover:bg-green-100 inline-flex items-center px-3 py-1 text-sm rounded"
+          class="btn-sm !border-[#cfd7df] text-[#12375d] bg-white hover:bg-[#ebeff3] text-sm text-[#009333] hover:bg-green-100 inline-flex items-center px-3 py-1 text-sm rounded"
         >
           <i class="ri-arrow-down-line mr-1"></i>
           Download

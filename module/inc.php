@@ -68,7 +68,7 @@ switch ($_GET["pl"]) {
         break;
 
      case "event": {
-       require 'pages/event/list.php';
+       require 'pages/event/event.php';
     }
         break;
 
