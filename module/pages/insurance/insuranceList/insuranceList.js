@@ -3,98 +3,139 @@ window.insuranceListModule = (function () {
     initialized: false,
     selectedPolicy: null,
   };
-
   const insuranceData = [
     {
+      id: 1,
       policyHolder: "Priya Sharma",
       email: "priya.sharma@example.com",
       policyNumber: "HP-2024-001",
       policyType: "Health Plus",
       premiumAmount: 15000,
       coverageAmount: 500000,
+      sumInsured: "500000",
       status: "Active",
+      startDate: "15/01/2024",
+      endDate: "14/01/2024",
+      policyTerm: "1 Year",
+      previousInsuranceCoverage: "Yes",
+      previousInsurerName: "Star Health Insurance",
+      noClaimBonus: "20%",
+      portingRequest: "No",
+      paymentMode: "UPI",
+      accountHolderName: "Priya Sharma",
+      bankAccountNumber: "1234567890",
+      ifscCode: "SBIN0001234",
+      nominees: [
+        { id: 1, name: "Raj Sharma", relation: "Husband", isPrimary: true },
+        { id: 2, name: "Ananya Sharma", relation: "Daughter", isPrimary: false }
+      ],
+      previousClaims: [
+        {
+          claimId: "CLM-2023-001",
+          claimDate: "2023-06-15",
+          hospitalName: "Apollo Hospital",
+          totalClaimedAmount: "45000",
+          status: "Approved",
+          insuranceCompanyName: "Star Health Insurance",
+          nameOfClaimant: "Priya Sharma",
+          dateOfAdmission: "2023-06-10",
+          dateOfDischarge: "2023-06-14",
+          typeOfAdmission: "Emergency",
+          reasonForHospitalization: "Acute Appendicitis",
+          natureOfTreatment: "Surgical",
+          doctorsName: "Dr. Ramesh Kumar",
+          doctorsContact: "+91-9876543210",
+          roomType: "Private",
+          preAuthorizationObtained: "Yes",
+          preAuthorizationNumber: "PA-2023-001",
+          billBreakup: {
+            hospitalCharges: "20000",
+            medicines: "8000",
+            diagnostics: "7000",
+            surgeonDoctorFee: "10000"
+          }
+        }
+      ]
     },
     {
+      id: 2,
       policyHolder: "Amit Singh",
       email: "amit.singh@example.com",
       policyNumber: "MC-2024-002",
       policyType: "Motor Comprehensive",
       premiumAmount: 10500,
       coverageAmount: 300000,
+      sumInsured: "300000",
       status: "Expired",
+      startDate: "20/03/2023",
+      endDate: "19/03/2024",
+      policyTerm: "1 Year",
+      previousInsuranceCoverage: "No",
+      previousInsurerName: "",
+      noClaimBonus: "15%",
+      portingRequest: "No",
+      paymentMode: "Credit Card",
+      accountHolderName: "Amit Singh",
+      bankAccountNumber: "9876543210",
+      ifscCode: "HDFC0002345",
+      nominees: [
+        { id: 3, name: "Neha Singh", relation: "Wife", isPrimary: true }
+      ],
+      previousClaims: []
     },
     {
+      id: 3,
       policyHolder: "Neha Gupta",
       email: "neha.gupta@example.com",
       policyNumber: "TL-2024-003",
       policyType: "Term Life",
       premiumAmount: 22000,
       coverageAmount: 1000000,
+      sumInsured: "1000000",
       status: "Active",
+      startDate: "01/02/2024",
+      endDate: "31/01/2025",
+      policyTerm: "1 Year",
+      previousInsuranceCoverage: "Yes",
+      previousInsurerName: "LIC",
+      noClaimBonus: "N/A",
+      portingRequest: "Yes",
+      paymentMode: "Bank Transfer",
+      accountHolderName: "Neha Gupta",
+      bankAccountNumber: "5678901234",
+      ifscCode: "ICIC0003456",
+      nominees: [
+        { id: 4, name: "Arun Gupta", relation: "Father", isPrimary: true },
+        { id: 5, name: "Sunita Gupta", relation: "Mother", isPrimary: false }
+      ],
+      previousClaims: []
     },
     {
+      id: 4,
       policyHolder: "Rahul Kumar",
       email: "rahul.kumar@example.com",
       policyNumber: "HI-2024-004",
       policyType: "Home Insurance",
       premiumAmount: 7800,
       coverageAmount: 250000,
+      sumInsured: "250000",
       status: "Pending",
-    },
-    {
-      policyHolder: "Sonia Devi",
-      email: "sonia.devi@example.com",
-      policyNumber: "WP-2024-005",
-      policyType: "Women's Protector",
-      premiumAmount: 18000,
-      coverageAmount: 750000,
-      status: "Active",
-    },
-    {
-      policyHolder: "Vijay Yadav",
-      email: "vijay.yadav@example.com",
-      policyNumber: "EC-2024-006",
-      policyType: "Education Care",
-      premiumAmount: 12000,
-      coverageAmount: 400000,
-      status: "Active",
-    },
-    {
-      policyHolder: "Ritu Verma",
-      email: "ritu.verma@example.com",
-      policyNumber: "PI-2024-007",
-      policyType: "Property Secure",
-      premiumAmount: 9200,
-      coverageAmount: 350000,
-      status: "Active",
-    },
-    {
-      policyHolder: "Manish Shah",
-      email: "manish.shah@example.com",
-      policyNumber: "TP-2024-008",
-      policyType: "Travel Protect",
-      premiumAmount: 4500,
-      coverageAmount: 100000,
-      status: "Active",
-    },
-    {
-      policyHolder: "Pooja Das",
-      email: "pooja.das@example.com",
-      policyNumber: "CC-2024-009",
-      policyType: "Critical Care",
-      premiumAmount: 19500,
-      coverageAmount: 800000,
-      status: "Pending",
-    },
-    {
-      policyHolder: "Sanjay Kumar",
-      email: "sanjay.kumar@example.com",
-      policyNumber: "RS-2024-010",
-      policyType: "Retirement Secure",
-      premiumAmount: 30000,
-      coverageAmount: 1500000,
-      status: "Active",
-    },
+      startDate: "10/04/2024",
+      endDate: "09/04/2025",
+      policyTerm: "1 Year",
+      previousInsuranceCoverage: "No",
+      previousInsurerName: "",
+      noClaimBonus: "N/A",
+      portingRequest: "No",
+      paymentMode: "Debit Card",
+      accountHolderName: "Rahul Kumar",
+      bankAccountNumber: "4567890123",
+      ifscCode: "AXIS0004567",
+      nominees: [
+        { id: 6, name: "Priya Kumar", relation: "Wife", isPrimary: true }
+      ],
+      previousClaims: []
+    }
   ];
 
   function getInsuranceCount() {
@@ -142,7 +183,7 @@ window.insuranceListModule = (function () {
         0 items selected
       </div>
       <div class="bg-[#ebeff3]">
-        <div class="mx-2 h-[calc(100vh-187px)] overflow-hidden rounded-lg bg-white">
+        <div class="mx-2 h-[calc(100vh-189px)] overflow-hidden rounded-lg bg-white">
           <div class="h-full overflow-y-auto overflow-x-auto w-full">
             <table class="w-full min-w-max">
               <thead class="text-[12px] text-[#475867] text-left bg-white sticky top-0 z-10 shadow-[0_1px_0_0_#ebeff3]">
@@ -164,7 +205,7 @@ window.insuranceListModule = (function () {
       </div>
       <footer class="bg-[#ebeff3] h-[54px] px-4 flex items-center justify-start">
         <span class="text-sm">
-          Showing <span class="text-red-600">10</span> of <span class="text-blue-600">20</span>
+          Showing <span class="text-red-600">${insuranceData.length}</span> of <span class="text-blue-600">${insuranceData.length}</span>
         </span>
       </footer>
       ${getFilterSidebarTemplate()}
@@ -239,9 +280,33 @@ window.insuranceListModule = (function () {
             </div>
           </div>
         </div>
-        ${getSidebarPlaceholder("policyenrollment")}
-        ${getSidebarPlaceholder("claimhistory")}
-        ${getSidebarPlaceholder("newclaimform")}
+        <div id="policyenrollment" class="p-4 overflow-y-auto flex-1 bg-gray-50">
+          <div class="bg-white p-4 rounded-lg shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4 text-sm text-gray-700">
+              ${getDetailpolicyenvironment()}
+            </div>
+          </div>
+        </div>
+        <div id="claimhistory" class="p-4 overflow-y-auto flex-1 bg-gray-50 hidden">
+   <div class="bg-white p-4 rounded-lg shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4 text-sm text-gray-700">
+              ${getDetailclaimhistory()}
+            </div>
+          </div>
+</div>
+
+         <div id="newclaimform" class="p-4 overflow-y-auto flex-1 bg-gray-50">
+          <div class="bg-white p-4 rounded-lg shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4 text-sm text-gray-700">
+              ${getNewClaimFormTemplate()}
+            </div>
+          </div>
+        </div>
+       
+         
+        
+      
+       
       </div>
     `;
   }
@@ -280,16 +345,182 @@ window.insuranceListModule = (function () {
       </div>
     `;
   }
-
-  function getSidebarPlaceholder(id) {
+  function getDetailpolicyenvironment() {
     return `
-      <div id="${id}" class="hidden flex-1 overflow-y-auto p-4 bg-gray-50">
-        <div class="mb-6 bg-white p-4 rounded-lg shadow-sm text-sm text-gray-600">
-          <p>Content for ${id} will be added here.</p>
+
+  
+      <h4 class="font-semibold text-md mb-3 border-b pb-2">Policy Details</h4>
+      
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Type of Policy <span class="text-red-500">*</span></label>
+        <select class="w-full border rounded px-2 py-1">
+          <option>Select Type</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Sum Insured (Coverage Amount) <span class="text-red-500">*</span></label>
+        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Sum Insured">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Policy Start Date <span class="text-red-500">*</span></label>
+        <input type="date" class="w-full border rounded px-2 py-1">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Policy Term <span class="text-red-500">*</span></label>
+        <input type="text" class="w-full border rounded px-2 py-1" placeholder="e.g., 1 year, 2 years">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Previous Insurance Coverage <span class="text-red-500">*</span></label>
+        <div class="flex gap-4">
+          <label><input type="radio" name="previousInsuranceCoverage"> Yes</label>
+          <label><input type="radio" name="previousInsuranceCoverage"> No</label>
         </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Policy Number</label>
+        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Policy Number">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">No Claim Bonus (if applicable)</label>
+        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter No Claim Bonus">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Porting Request (if switching insurer) <span class="text-red-500">*</span></label>
+        <div class="flex gap-4">
+          <label><input type="radio" name="portingRequest"> Yes</label>
+          <label><input type="radio" name="portingRequest"> No</label>
+        </div>
+      </div>
+
+      <h4 class="font-semibold text-md mb-3 mt-6 border-b pb-2">Payment & Banking Information</h4>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Payment Mode <span class="text-red-500">*</span></label>
+        <select class="w-full border rounded px-2 py-1">
+          <option>Select Mode</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Account Holder Name <span class="text-red-500">*</span></label>
+        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Account Holder Name">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Bank Account Number <span class="text-red-500">*</span></label>
+        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Bank Account Number">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">IFSC Code <span class="text-red-500">*</span></label>
+        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter IFSC Code">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Upload Cancelled Cheque (optional)</label>
+        <input type="file" class="w-full border rounded px-2 py-1">
+      </div>
+
+      <h4 class="font-semibold text-md mb-3 mt-6 border-b pb-2">Documents & Nominee Selection</h4>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">ID Proof <span class="text-red-500">*</span></label>
+        <input type="file" class="w-full border rounded px-2 py-1">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Address Proof <span class="text-red-500">*</span></label>
+        <input type="file" class="w-full border rounded px-2 py-1">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Nominee Selection <span class="text-red-500">*</span></label>
+        <div class="flex gap-4">
+          <label><input type="radio" name="selectedNominee"> Nominee 1</label>
+          <label><input type="radio" name="selectedNominee"> Nominee 2</label>
+        </div>
+      </div>
+
+      <button class="bg-green-600 text-white px-4 py-2 rounded">Save Policy Enrollment</button>
+    </div>
+
+  `;
+  }
+  function getDetailclaimhistory() {
+    const container = $("#claimhistory");
+    if (!container.length) return;
+  
+    if (!state.selectedPolicy || state.selectedPolicy.previousClaims.length === 0) {
+      container.html(`<p class="text-center text-gray-500">No claims found</p>`);
+    } else {
+      let html = `
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="bg-gray-100 text-left">
+              <th class="p-2">Claim ID</th>
+              <th class="p-2">Claim Date</th>
+              <th class="p-2">Hospital Name</th>
+              <th class="p-2">Total Claimed</th>
+              <th class="p-2">Status</th>
+              <th class="p-2">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+  
+      state.selectedPolicy.previousClaims.forEach(claim => {
+        html += `
+          <tr class="border-b">
+            <td class="p-2">${claim.claimId}</td>
+            <td class="p-2">${claim.claimDate}</td>
+            <td class="p-2">${claim.hospitalName}</td>
+            <td class="p-2">₹${parseInt(claim.totalClaimedAmount).toLocaleString()}</td>
+            <td class="p-2">
+              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${claim.status === 'Approved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">${claim.status}</span>
+            </td>
+            <td class="p-2 text-blue-600 cursor-pointer">View</td>
+          </tr>
+        `;
+      });
+  
+      html += `</tbody></table>`;
+      container.html(html);
+    }
+  }
+  
+  function getNewClaimFormTemplate() {
+    return `
+      <div class="bg-white p-4 rounded-lg shadow-sm">
+        <h4 class="font-semibold mb-2">New Claim Form</h4>
+        <div class="mb-4">
+          <label>Claim ID</label>
+          <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Claim ID">
+        </div>
+        <div class="mb-4">
+          <label>Hospital Name</label>
+          <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Hospital Name">
+        </div>
+        <div class="mb-4">
+          <label>Total Claimed Amount</label>
+          <input type="number" class="w-full border rounded px-2 py-1" placeholder="Enter Amount">
+        </div>
+        <div class="mb-4">
+          <label>Reason</label>
+          <textarea class="w-full border rounded px-2 py-1" placeholder="Enter Reason"></textarea>
+        </div>
+        <button class="bg-green-600 text-white px-4 py-2 rounded">Submit Claim</button>
       </div>
     `;
   }
+  
+ 
 
   function renderInsuranceTable() {
     const tbody = $("#InsuranceTableBody");
@@ -299,13 +530,28 @@ window.insuranceListModule = (function () {
     insuranceData.forEach((policy, index) => {
       tbody.append(`
         <tr class="hover:bg-[#f5f7f9] text-sm cursor-pointer divide-x divide-[#ebeff3] group employee-row"
-            data-name="${policy.policyHolder}"
-            data-policy="${policy.policyNumber}"
-            data-type="${policy.policyType}"
-            data-email="${policy.email}"
-            data-premium="${policy.premiumAmount}"
-            data-coverage="${policy.coverageAmount}"
-            data-status="${policy.status}">
+             data-name="${policy.policyHolder}"
+           data-email="${policy.email}"
+           data-policy="${policy.policyNumber}"
+           data-type="${policy.policyType}"
+           data-premium="${policy.premiumAmount}"
+           data-coverage="${policy.coverageAmount}"
+           data-status="${policy.status}"
+
+           data-start-date="${policy.startDate}"
+           data-end-date="${policy.endDate}"
+           data-policy-term="${policy.policyTerm}"
+           data-previous-insurance-coverage="${policy.previousInsuranceCoverage}"
+           data-no-claim-bonus="${policy.noClaimBonus}"
+           data-porting-request="${policy.portingRequest}"
+           data-payment-mode="${policy.paymentMode}"
+           data-account-holder-name="${policy.accountHolderName}"
+           data-bank-account-number="${policy.bankAccountNumber}"
+           data-ifsc-code="${policy.ifscCode}"
+
+           data-nominees='${JSON.stringify(policy.nominees)}'
+           data-previous-claims='${JSON.stringify(policy.previousClaims)}'
+    >
           <td class="p-2 border-b">
             <input type="checkbox" class="rowCheck cursor-pointer accent-green-600">
           </td>
@@ -381,8 +627,9 @@ window.insuranceListModule = (function () {
 
   function handleRowClick(e) {
     if ($(e.target).closest(".rowCheck, a, i").length > 0) return;
-
+  
     const row = $(this).closest("tr");
+  
     state.selectedPolicy = {
       policyHolder: row.data("name"),
       email: row.data("email"),
@@ -391,15 +638,34 @@ window.insuranceListModule = (function () {
       premiumAmount: row.data("premium"),
       coverageAmount: row.data("coverage"),
       status: row.data("status"),
+  
+      start_date: row.data("start-date"),
+      end_date: row.data("end-date"),
+      policy_term: row.data("policy-term"),
+      previous_insurance_coverage: row.data("previous-insurance-coverage"),
+      no_claim_bonus: row.data("no-claim-bonus"),
+      porting_request: row.data("porting-request"),
+      payment_mode: row.data("payment-mode"),
+      account_holder_name: row.data("account-holder-name"),
+      bank_account_number: row.data("bank-account-number"),
+      ifsc_code: row.data("ifsc-code"),
+  
+      nominees: JSON.parse(row.attr("data-nominees") || "[]"),
+      previousClaims: JSON.parse(row.attr("data-previous-claims") || "[]"),
     };
-
+  
     $("#payrollSidebarTitle").text(
       `Policy Insights for ${state.selectedPolicy.policyHolder} - ${state.selectedPolicy.policyNumber}`
     );
+  
     updatePolicyDetailsUI();
+    getDetailclaimhistory();
     setSidebarTab("policyinformation");
+    
+
     openSidebar();
   }
+  
 
   function updatePolicyDetailsUI() {
     if (!state.selectedPolicy) return;
@@ -422,8 +688,19 @@ window.insuranceListModule = (function () {
     $("#detailIFSCCode").text(state.selectedPolicy.ifsc_code || "N/A");
 
     const nomineesContainer = $("#detailNominees");
-    nomineesContainer.empty().append("<li>No nominees added.</li>");
+    nomineesContainer.empty();
+    
+    if (state.selectedPolicy.nominees.length === 0) {
+      nomineesContainer.append("<li>No nominees added.</li>");
+    } else {
+      state.selectedPolicy.nominees.forEach(n => {
+        nomineesContainer.append(
+          `<li>${n.name} (${n.relation}) ${n.isPrimary ? "(Primary)" : ""}</li>`
+        );
+      });
+    }
   }
+ 
 
   function attachCheckboxEvents() {
     const selectAll = $("#selectAll");
@@ -473,6 +750,11 @@ window.insuranceListModule = (function () {
 
     $("#policyinformation, #policyenrollment, #claimhistory, #newclaimform").addClass("hidden");
     $(`#${targetTab}`).removeClass("hidden");
+
+    if (targetTab === 'claimhistory') {
+    getDetailclaimhistory();
+  }
+    
   }
 
   return {
