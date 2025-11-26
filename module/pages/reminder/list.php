@@ -6,7 +6,7 @@
         <button class="tab active-tab bg-[#ebeff3] text-[#384551] inline-block p-[8px] rounded-t-[0.375rem] cursor-pointer "
             data-tab="tasks">
             <span class="flex items-center gap-1">
-               
+               <i class="ri-task-line mr-1"></i>
                 Tasks
                 <span
                     class="ml-2 counter-badge inline-block min-w-[20px] h-[20px] px-[6px] text-xs leading-[20px] rounded-full bg-[#009333] text-white">
@@ -24,7 +24,7 @@
         <button class="tab bg-white text-[#384551] inline-block p-[8px] rounded-t-[0.375rem] cursor-pointer hover:text-[#6689b8] hover:bg-[#f5f7f9]"
             data-tab="completed">
             <span class="flex items-center gap-1">
-                
+                <i class="ri-check-double-line mr-1"></i>
                 Completed
                 <span
                     class="ml-2 counter-badge hidden inline-block min-w-[20px] h-[20px] px-[6px] text-xs leading-[20px] rounded-full bg-[#009333] text-white">
