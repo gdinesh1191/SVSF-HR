@@ -94,7 +94,7 @@ function bindAuthModalEvents() {
   $(document).on("click", ".auth-modal-tab", function () {
     const tab = $(this).data("tab");
     if (tab) {
-      setActiveTab(tab);
+      setAuthActiveTab(tab);
     }
   });
 
@@ -128,7 +128,7 @@ function bindAuthModalEvents() {
   $(document).on("click", "#authModalSaveBtn", handleNewAuthorization);
 }
 
-function setActiveTab(tab) {
+function setAuthActiveTab(tab) {
   authorizationModalStore.activeTab = tab;
 
   // Update tab styles
@@ -195,7 +195,7 @@ function handleNewAuthorization() {
     $(".auth-modal-checkbox").prop("checked", false);
 
     authorizationModalStore.isSaving = false;
-    setActiveTab("Authorization_list");
+    setAuthActiveTab("Authorization_list");
     renderAuthorizationList();
   }, 300);
 }

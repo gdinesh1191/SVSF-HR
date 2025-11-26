@@ -15,25 +15,25 @@ const leavegroupModalEls = {
   saveButton: null,
 };
 
-function initGroupModal(containerSelector) {
+function initLeaveGroupModal(containerSelector) {
   if (!containerSelector) {
     containerSelector = "#leaveGroupAddGroupContent";
   }
   leavegroupModalEls.container = $(containerSelector);
   if (!leavegroupModalEls.container || !leavegroupModalEls.container.length) return;
 
-  cacheGroupModalElements();
-  bindGroupModalEvents();
-  renderGroupModal();
+  cacheLeaveGroupModalElements();
+  bindLeaveGroupModalEvents();
+  renderLeaveGroupModal();
 }
 
-function cacheGroupModalElements() {
+function cacheLeaveGroupModalElements() {
   leavegroupModalEls.groupNameInput = leavegroupModalEls.container.find("#leaveGroupModalGroupName");
   leavegroupModalEls.descriptionInput = leavegroupModalEls.container.find("#leaveGroupModalDescription");
   leavegroupModalEls.saveButton = leavegroupModalEls.container.find("#leaveGroupModalSaveBtn");
 }
 
-function bindGroupModalEvents() {
+function bindLeaveGroupModalEvents() {
   // Input changes
   if (leavegroupModalEls.groupNameInput && leavegroupModalEls.groupNameInput.length) {
     leavegroupModalEls.groupNameInput.on("input", function () {
@@ -49,7 +49,7 @@ function bindGroupModalEvents() {
 
   // Save button
   if (leavegroupModalEls.saveButton && leavegroupModalEls.saveButton.length) {
-    leavegroupModalEls.saveButton.on("click", handleSaveGroup);
+    leavegroupModalEls.saveButton.on("click", handleSaveLeaveGroup);
   }
 
   // Also bind with document for dynamic content
@@ -61,10 +61,10 @@ function bindGroupModalEvents() {
     leavegroupModalStore.groupdata.description = $(this).val();
   });
 
-  $(document).on("click", "#leaveGroupModalSaveBtn", handleSaveGroup);
+  $(document).on("click", "#leaveGroupModalSaveBtn", handleSaveLeaveGroup);
 }
 
-async function handleSaveGroup() {
+async function handleSaveLeaveGroup() {
   const payload = {
     data: leavegroupModalStore.groupdata,
   };
@@ -73,7 +73,7 @@ async function handleSaveGroup() {
 
   try {
     $.ajax({
-      url: "/policy/postAuthorizationGroup",
+      url: "/policy/postLeaveGroup",
       method: "POST",
       dataType: "json",
       data: payload,
@@ -83,12 +83,12 @@ async function handleSaveGroup() {
           leavegroupModalStore.groupdata = { id: 0, groupName: "", description: "" };
           
           // Close modal
-          if (window.authorizationGroupModule) {
-            const store = window.authorizationGroupModule.getStore();
+          if (window.leavePolicyGroupModule) {
+            const store = window.leavePolicyGroupModule.getStore();
             store.isAddGroupOpen = false;
-            // Trigger re-render of modals in authorization group
-            if (window.authorizationGroupModule.renderModals) {
-              window.authorizationGroupModule.renderModals();
+            // Trigger re-render of modals in leave policy group
+            if (window.leavePolicyGroupModule.renderModals) {
+              window.leavePolicyGroupModule.renderModals();
             }
           }
           
@@ -97,8 +97,8 @@ async function handleSaveGroup() {
           $("#leaveGroupModalDescription").val("");
           
           // Optionally refresh the main list
-          if (window.authorizationGroupModule && window.authorizationGroupModule.fetchAuthorizationGroup) {
-            window.authorizationGroupModule.fetchAuthorizationGroup(1);
+          if (window.leavePolicyGroupModule && window.leavePolicyGroupModule.fetchLeaveGroup) {
+            window.leavePolicyGroupModule.fetchLeaveGroup(1);
           }
         }
       })
@@ -110,12 +110,13 @@ async function handleSaveGroup() {
   }
 }
 
-function renderGroupModal() {
+function renderLeaveGroupModal() {
   if (!leavegroupModalEls.container || !leavegroupModalEls.container.length) return;
 
   const html = `
     <div class="p-4 overflow-y-auto flex-1">
       <div class="mb-4">
+       <div class="mb-4">
         <label class="block text-sm font-semibold text-[#000000] mb-1.5">Group Name</label>
         <input
           type="text"
@@ -144,7 +145,7 @@ function renderGroupModal() {
   `;
 
   leavegroupModalEls.container.html(html);
-  cacheGroupModalElements();
+  cacheLeaveGroupModalElements();
 }
 
 // Utility function
@@ -161,10 +162,10 @@ function escapeHtml(str) {
 }
 
 // Export for external use
-window.initGroupModal = initGroupModal;
-window.groupModalModule = {
-  initGroupModal,
-  handleSaveGroup,
+window.initLeaveGroupModal = initLeaveGroupModal;
+window.leaveGroupModalModule = {
+  initLeaveGroupModal,
+  handleSaveLeaveGroup,
   getStore: () => leavegroupModalStore,
 };
 

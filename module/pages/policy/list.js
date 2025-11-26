@@ -203,6 +203,26 @@ function renderTabContent(tab) {
     }
     return;
   }
+  if (tab === "RotationShift") {
+    // RotationShift component will render itself
+    if (
+      window.rotationShiftModule &&
+      window.rotationShiftModule.renderRotationShift
+    ) {
+      window.rotationShiftModule.renderRotationShift();
+    }
+    return;
+  }
+  if (tab === "ShiftPolicy") {
+    // ShiftPolicy component will render itself
+    if (
+      window.shiftModule &&
+      window.shiftModule.renderShift
+    ) {
+      window.shiftModule.renderShift();
+    }
+    return;
+  }
 
   // Placeholder content for other tabs - replace with actual component rendering
   const placeholder = `

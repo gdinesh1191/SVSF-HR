@@ -122,10 +122,23 @@
 </div>
 
 <script src="/module/pages/policy/list.js"></script>
+
+<!-- Authorization Group -->
 <script src="/module/pages/policy/authorizationGroup/authorizationGroup.js"></script>
 <script src="/module/pages/policy/authorizationGroup/authorizationModal.js"></script>
 <script src="/module/pages/policy/authorizationGroup/groupModal.js"></script>
 
+<!-- Leave Policy -->
 <script src="/module/pages/policy/leavePolicy/leavePolicyGroup.js"></script>
 <script src="/module/pages/policy/leavePolicy/leavePolicyModal.js"></script>
 <script src="/module/pages/policy/leavePolicy/leaveGroupModal.js"></script>
+
+<!-- Rotation Shift -->
+<script src="/module/pages/policy/rotationShift/rotationShiftGroup.js"></script>
+<script src="/module/pages/policy/rotationShift/rotationShiftModal.js"></script>
+<script src="/module/pages/policy/rotationShift/rotationShiftGroupModal.js"></script>
+
+<!-- Shift Policy -->
+<script src="/module/pages/policy/shift/shiftGroup.js"></script>
+<script src="/module/pages/policy/shift/shiftModal.js"></script>
+<script src="/module/pages/policy/shift/shiftGroupModal.js"></script>
