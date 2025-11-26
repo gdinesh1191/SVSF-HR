@@ -27,7 +27,12 @@ window.insuranceListModule = (function () {
       ifscCode: "SBIN0001234",
       nominees: [
         { id: 1, name: "Raj Sharma", relation: "Husband", isPrimary: true },
-        { id: 2, name: "Ananya Sharma", relation: "Daughter", isPrimary: false }
+        {
+          id: 2,
+          name: "Ananya Sharma",
+          relation: "Daughter",
+          isPrimary: false,
+        },
       ],
       previousClaims: [
         {
@@ -52,10 +57,10 @@ window.insuranceListModule = (function () {
             hospitalCharges: "20000",
             medicines: "8000",
             diagnostics: "7000",
-            surgeonDoctorFee: "10000"
-          }
-        }
-      ]
+            surgeonDoctorFee: "10000",
+          },
+        },
+      ],
     },
     {
       id: 2,
@@ -79,9 +84,9 @@ window.insuranceListModule = (function () {
       bankAccountNumber: "9876543210",
       ifscCode: "HDFC0002345",
       nominees: [
-        { id: 3, name: "Neha Singh", relation: "Wife", isPrimary: true }
+        { id: 3, name: "Neha Singh", relation: "Wife", isPrimary: true },
       ],
-      previousClaims: []
+      previousClaims: [],
     },
     {
       id: 3,
@@ -106,9 +111,9 @@ window.insuranceListModule = (function () {
       ifscCode: "ICIC0003456",
       nominees: [
         { id: 4, name: "Arun Gupta", relation: "Father", isPrimary: true },
-        { id: 5, name: "Sunita Gupta", relation: "Mother", isPrimary: false }
+        { id: 5, name: "Sunita Gupta", relation: "Mother", isPrimary: false },
       ],
-      previousClaims: []
+      previousClaims: [],
     },
     {
       id: 4,
@@ -132,10 +137,10 @@ window.insuranceListModule = (function () {
       bankAccountNumber: "4567890123",
       ifscCode: "AXIS0004567",
       nominees: [
-        { id: 6, name: "Priya Kumar", relation: "Wife", isPrimary: true }
+        { id: 6, name: "Priya Kumar", relation: "Wife", isPrimary: true },
       ],
-      previousClaims: []
-    }
+      previousClaims: [],
+    },
   ];
 
   function getInsuranceCount() {
@@ -205,7 +210,9 @@ window.insuranceListModule = (function () {
       </div>
       <footer class="bg-[#ebeff3] h-[54px] px-4 flex items-center justify-start">
         <span class="text-sm">
-          Showing <span class="text-red-600">${insuranceData.length}</span> of <span class="text-blue-600">${insuranceData.length}</span>
+          Showing <span class="text-red-600">${
+            insuranceData.length
+          }</span> of <span class="text-blue-600">${insuranceData.length}</span>
         </span>
       </footer>
       ${getFilterSidebarTemplate()}
@@ -288,7 +295,7 @@ window.insuranceListModule = (function () {
           </div>
         </div>
         <div id="claimhistory" class="p-4 overflow-y-auto flex-1 bg-gray-50 hidden">
-   <div class="bg-white p-4 rounded-lg shadow-sm">
+         <div class="bg-white p-4 rounded-lg shadow-sm">
             <div class="grid grid-cols-1 md:grid-cols-1 gap-4 text-sm text-gray-700">
               ${getDetailclaimhistory()}
             </div>
@@ -347,180 +354,360 @@ window.insuranceListModule = (function () {
   }
   function getDetailpolicyenvironment() {
     return `
+ <!-- Policy Details -->
+    <h4 class="font-semibold text-md mb-3 border-b pb-2">Policy Details</h4>
 
-  
-      <h4 class="font-semibold text-md mb-3 border-b pb-2">Policy Details</h4>
-      
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Type of Policy <span class="text-red-500">*</span></label>
-        <select class="w-full border rounded px-2 py-1">
-          <option>Select Type</option>
-        </select>
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Sum Insured (Coverage Amount) <span class="text-red-500">*</span></label>
-        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Sum Insured">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Policy Start Date <span class="text-red-500">*</span></label>
-        <input type="date" class="w-full border rounded px-2 py-1">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Policy Term <span class="text-red-500">*</span></label>
-        <input type="text" class="w-full border rounded px-2 py-1" placeholder="e.g., 1 year, 2 years">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Previous Insurance Coverage <span class="text-red-500">*</span></label>
-        <div class="flex gap-4">
-          <label><input type="radio" name="previousInsuranceCoverage"> Yes</label>
-          <label><input type="radio" name="previousInsuranceCoverage"> No</label>
-        </div>
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Policy Number</label>
-        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Policy Number">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">No Claim Bonus (if applicable)</label>
-        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter No Claim Bonus">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Porting Request (if switching insurer) <span class="text-red-500">*</span></label>
-        <div class="flex gap-4">
-          <label><input type="radio" name="portingRequest"> Yes</label>
-          <label><input type="radio" name="portingRequest"> No</label>
-        </div>
-      </div>
-
-      <h4 class="font-semibold text-md mb-3 mt-6 border-b pb-2">Payment & Banking Information</h4>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Payment Mode <span class="text-red-500">*</span></label>
-        <select class="w-full border rounded px-2 py-1">
-          <option>Select Mode</option>
-        </select>
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Account Holder Name <span class="text-red-500">*</span></label>
-        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Account Holder Name">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Bank Account Number <span class="text-red-500">*</span></label>
-        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Bank Account Number">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">IFSC Code <span class="text-red-500">*</span></label>
-        <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter IFSC Code">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Upload Cancelled Cheque (optional)</label>
-        <input type="file" class="w-full border rounded px-2 py-1">
-      </div>
-
-      <h4 class="font-semibold text-md mb-3 mt-6 border-b pb-2">Documents & Nominee Selection</h4>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">ID Proof <span class="text-red-500">*</span></label>
-        <input type="file" class="w-full border rounded px-2 py-1">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Address Proof <span class="text-red-500">*</span></label>
-        <input type="file" class="w-full border rounded px-2 py-1">
-      </div>
-
-      <div class="mb-4">
-        <label class="block font-medium mb-1">Nominee Selection <span class="text-red-500">*</span></label>
-        <div class="flex gap-4">
-          <label><input type="radio" name="selectedNominee"> Nominee 1</label>
-          <label><input type="radio" name="selectedNominee"> Nominee 2</label>
-        </div>
-      </div>
-
-      <button class="bg-green-600 text-white px-4 py-2 rounded">Save Policy Enrollment</button>
+    <!-- Type of Policy -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Type of Policy <span class="text-red-500">*</span></label>
+      <select class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529]  bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]">
+        <option>Select Type</option>
+        <!-- Add options here -->
+      </select>
     </div>
+
+    <!-- Sum Insured -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Sum Insured (Coverage Amount) <span class="text-red-500">*</span></label>
+      <input type="text" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333] only_number" placeholder="Enter Sum Insured">
+    </div>
+
+    <!-- Policy Start Date -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class=" w-1/4 text-sm text-[#1D1D1D]">Policy Start Date <span class="text-red-500">*</span></label>
+      <input type="date" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]">
+    </div>
+
+    <!-- Policy Term -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Policy Term <span class="text-red-500">*</span></label>
+      <input type="text" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]" placeholder="e.g., 1 year, 2 years">
+    </div>
+
+    <!-- Previous Insurance Coverage -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Previous Insurance Coverage <span class="text-red-500">*</span></label>
+      <div class="flex gap-4 w-3/4">
+        <label><input type="radio" name="previousInsuranceCoverage"> Yes</label>
+        <label><input type="radio" name="previousInsuranceCoverage"> No</label>
+      </div>
+    </div>
+
+    <!-- Previous Insurer Name (conditionally shown) -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Previous Insurer Name</label>
+      <input type="text" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]" placeholder="Enter Previous Insurer Name">
+    </div>
+
+    <!-- Policy Number -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Policy Number</label>
+      <input type="text" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]" placeholder="Enter Policy Number">
+    </div>
+
+    <!-- No Claim Bonus -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">No Claim Bonus (if applicable)</label>
+      <input type="text" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]" placeholder="Enter No Claim Bonus">
+    </div>
+
+    <!-- Porting Request -->
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Porting Request (if switching insurer) <span class="text-red-500">*</span></label>
+      <div class="flex gap-4 w-3/4">
+        <label><input type="radio" name="portingRequest"> Yes</label>
+        <label><input type="radio" name="portingRequest"> No</label>
+      </div>
+    </div>
+
+    <!-- Payment & Banking Information -->
+    <h4 class="font-semibold text-md mb-3 mt-6 border-b pb-2">Payment & Banking Information</h4>
+
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Payment Mode <span class="text-red-500">*</span></label>
+      <select class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]">
+        <option>Select Mode</option>
+      </select>
+    </div>
+
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Account Holder Name <span class="text-red-500">*</span></label>
+      <input type="text" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]" placeholder="Enter Account Holder Name">
+    </div>
+
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Bank Account Number <span class="text-red-500">*</span></label>
+      <input type="text" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333] only_number" placeholder="Enter Bank Account Number">
+    </div>
+
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">IFSC Code <span class="text-red-500">*</span></label>
+      <input type="text" class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]" placeholder="Enter IFSC Code">
+    </div>
+
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Upload Cancelled Cheque (optional)</label>
+      <input  class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]"
+      placeholder="Choose file no file choosen">
+    </div>
+
+    <!-- Documents & Nominee Selection -->
+    <h4 class="font-semibold text-md mb-3 mt-6 border-b pb-2">Documents & Nominee Selection</h4>
+
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">ID Proof <span class="text-red-500">*</span></label>
+      <input  class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]"
+       placeholder="Choose file no file choosen">
+    </div>
+
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Address Proof <span class="text-red-500">*</span></label>
+      <input  class="w-3/4 block w-full text-sm h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]"
+       placeholder="Choose file no file choosen">
+    </div>
+
+    <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <label class="w-1/4 text-sm text-[#1D1D1D]">Nominee Selection <span class="text-red-500">*</span></label>
+      <div class="flex gap-4 w-3/4">
+        <label><input type="radio" name="selectedNominee"> Nominee 1</label>
+        <label><input type="radio" name="selectedNominee"> Nominee 2</label>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex items-center space-x-4">
+                            <label class="w-1/4 text-sm text-[#1D1D1D]">
+
+                            </label>
+                            <button type="submit"
+                                class="w-3/4 w-full px-2 py-2 text-sm  rounded-lg bg-[#009333] text-white border border-[#009333] hover:bg-[#007a2a] transition" />
+                            Save
+                            </button>
+                        </div>
+
+
+
 
   `;
   }
   function getDetailclaimhistory() {
     const container = $("#claimhistory");
     if (!container.length) return;
-  
-    if (!state.selectedPolicy || state.selectedPolicy.previousClaims.length === 0) {
-      container.html(`<p class="text-center text-gray-500">No claims found</p>`);
+
+    if (
+      !state.selectedPolicy ||
+      state.selectedPolicy.previousClaims.length === 0
+    ) {
+      container.html(
+        `<p class="text-center text-gray-500">No claims found</p>`
+      );
     } else {
       let html = `
+       <div class="bg-white p-4 rounded-lg shadow-sm">
         <table class="w-full border-collapse text-sm">
           <thead>
             <tr class="bg-gray-100 text-left">
-              <th class="p-2">Claim ID</th>
-              <th class="p-2">Claim Date</th>
-              <th class="p-2">Hospital Name</th>
-              <th class="p-2">Total Claimed</th>
-              <th class="p-2">Status</th>
-              <th class="p-2">Action</th>
+              <th class="p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Claim ID</th>
+              <th class="p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Claim Date</th>
+              <th class="p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hospital Name</th>
+              <th class="p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Claimed</th>
+              <th class="p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
             </tr>
           </thead>
           <tbody>
       `;
-  
-      state.selectedPolicy.previousClaims.forEach(claim => {
+
+      state.selectedPolicy.previousClaims.forEach((claim) => {
         html += `
-          <tr class="border-b">
-            <td class="p-2">${claim.claimId}</td>
-            <td class="p-2">${claim.claimDate}</td>
-            <td class="p-2">${claim.hospitalName}</td>
-            <td class="p-2">₹${parseInt(claim.totalClaimedAmount).toLocaleString()}</td>
-            <td class="p-2">
-              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${claim.status === 'Approved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">${claim.status}</span>
+          <tr class="">
+            <td class="p-2 whitespace-nowrap text-sm text-gray-900">${claim.claimId}</td>
+            <td class="p-2 whitespace-nowrap text-sm text-gray-900">${claim.claimDate}</td>
+            <td class="p-2 whitespace-nowrap text-sm text-gray-900">${claim.hospitalName}</td>
+            <td class="p-2 whitespace-nowrap text-sm text-gray-900">₹${parseInt(
+              claim.totalClaimedAmount
+            ).toLocaleString()}</td>
+            <td class="p-2 whitespace-nowrap text-sm text-gray-900">
+              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                claim.status === "Approved"
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
+              }">${claim.status}</span>
             </td>
-            <td class="p-2 text-blue-600 cursor-pointer">View</td>
+            <td class="p-2 whitespace-nowrap text-sm text-gray-900 text-blue-600 cursor-pointer">View</td>
           </tr>
         `;
       });
-  
+
       html += `</tbody></table>`;
       container.html(html);
     }
   }
-  
+
   function getNewClaimFormTemplate() {
     return `
-      <div class="bg-white p-4 rounded-lg shadow-sm">
-        <h4 class="font-semibold mb-2">New Claim Form</h4>
-        <div class="mb-4">
-          <label>Claim ID</label>
-          <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Claim ID">
+      <form>
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="overflow-y-auto px-2 py-2">
+  
+            <!-- Policy Details -->
+            <h4 class="font-semibold text-md mb-3 border-b pb-2">Policy Details</h4>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Policy Number</label>
+              <input type="text" name="policyNumber" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md bg-gray-100" placeholder="Auto-filled / Read Only" readonly>
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Insurance Company Name</label>
+              <input type="text" name="insuranceCompanyName" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md bg-gray-100" placeholder="Auto-filled / Read Only" readonly>
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Name of Policyholder</label>
+              <input type="text" name="nameOfClaimant" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md bg-gray-100" placeholder="Auto-filled / Read Only" readonly>
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Type of Policy</label>
+              <input type="text" name="policyType" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md bg-gray-100" placeholder="Auto-filled / Read Only" readonly>
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Sum Insured</label>
+              <input type="text" name="sumInsured" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md bg-gray-100" placeholder="Auto-filled / Read Only" readonly>
+            </div>
+  
+            <!-- Hospitalization Details -->
+            <h4 class="font-semibold text-md mb-3 mt-6 border-b pb-2">Hospitalization Details</h4>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Hospital Name <span class="text-red-500">*</span></label>
+              <input type="text" name="hospitalName" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]" placeholder="Enter Hospital Name">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Hospital Address <span class="text-red-500">*</span></label>
+              <input type="text" name="hospitalAddress" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]" placeholder="Enter Hospital Address">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Hospital Registration Number</label>
+              <input type="text" name="hospitalRegistrationNumber" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md" placeholder="Enter Hospital Registration Number">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Date of Admission <span class="text-red-500">*</span></label>
+              <input type="date" name="dateOfAdmission" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Date of Discharge <span class="text-red-500">*</span></label>
+              <input type="date" name="dateOfDischarge" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Type of Admission <span class="text-red-500">*</span></label>
+              <select name="typeOfAdmission" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]">
+                <option value="">Select Type</option>
+                <option value="Planned">Planned</option>
+                <option value="Emergency">Emergency</option>
+              </select>
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-start gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Reason for Hospitalization / Diagnosis <span class="text-red-500">*</span></label>
+              <textarea name="reasonForHospitalization" class="w-3/4 text-sm h-[80px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]" placeholder="Enter Reason / Diagnosis"></textarea>
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Nature of Treatment <span class="text-red-500">*</span></label>
+              <select name="natureOfTreatment" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]">
+                <option value="">Select Type</option>
+                <option value="Medical">Medical</option>
+                <option value="Surgical">Surgical</option>
+                <option value="Maternity">Maternity</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-start gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Doctor's Name <span class="text-red-500">*</span></label>
+              <input type="text" name="doctorsName" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md" placeholder="Enter Doctor's Name">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-start gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Doctor's Contact <span class="text-red-500">*</span></label>
+              <input type="text" name="doctorsContact" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md" placeholder="Enter Doctor's Contact">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Room Type <span class="text-red-500">*</span></label>
+              <select name="roomType" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]">
+                <option value="">Select Room Type</option>
+                <option value="General">General</option>
+                <option value="Semi-private">Semi-private</option>
+                <option value="Private">Private</option>
+                <option value="ICU">ICU</option>
+              </select>
+            </div>
+  
+            <!-- Claim Details -->
+            <h4 class="font-semibold text-md mb-3 mt-6 border-b pb-2">Claim Details</h4>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Total Amount Claimed <span class="text-red-500">*</span></label>
+              <input type="number" name="totalAmountClaimed" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]" placeholder="Enter Total Claimed Amount">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Pre-authorization Obtained? <span class="text-red-500">*</span></label>
+              <select name="preAuthorizationObtained" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md">
+                <option value="">Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Pre-authorization Number</label>
+              <input type="text" name="preAuthorizationNumber" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md" placeholder="Enter Pre-authorization Number">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Hospital Charges <span class="text-red-500">*</span></label>
+              <input type="number" name="hospitalCharges" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]" placeholder="Enter Hospital Charges">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Medicines <span class="text-red-500">*</span></label>
+              <input type="number" name="medicines" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]" placeholder="Enter Medicines Cost">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Diagnostics <span class="text-red-500">*</span></label>
+              <input type="number" name="diagnostics" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]" placeholder="Enter Diagnostics Cost">
+            </div>
+  
+            <div class="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-1/4 text-sm text-[#1D1D1D]">Surgeon/Doctor Fee <span class="text-red-500">*</span></label>
+              <input type="number" name="surgeonDoctorFee" class="w-3/4 text-sm h-[35px] px-[0.75rem] py-[0.375rem] border border-[#cbcbcb] rounded-md focus:outline-none focus:border-[#009333]" placeholder="Enter Surgeon/Doctor Fee">
+            </div>
+  
+            <!-- Submit Button -->
+            <div class="flex items-center space-x-4 mt-4">
+              <label class="w-1/4"></label>
+              <button type="submit" class="w-3/4 px-4 py-2 text-sm rounded-lg bg-[#009333] text-white border border-[#009333] hover:bg-[#007a2a] transition">
+                Submit Claim
+              </button>
+            </div>
+  
+          </div>
         </div>
-        <div class="mb-4">
-          <label>Hospital Name</label>
-          <input type="text" class="w-full border rounded px-2 py-1" placeholder="Enter Hospital Name">
-        </div>
-        <div class="mb-4">
-          <label>Total Claimed Amount</label>
-          <input type="number" class="w-full border rounded px-2 py-1" placeholder="Enter Amount">
-        </div>
-        <div class="mb-4">
-          <label>Reason</label>
-          <textarea class="w-full border rounded px-2 py-1" placeholder="Enter Reason"></textarea>
-        </div>
-        <button class="bg-green-600 text-white px-4 py-2 rounded">Submit Claim</button>
-      </div>
+      </form>
     `;
   }
   
- 
 
   function renderInsuranceTable() {
     const tbody = $("#InsuranceTableBody");
@@ -541,7 +728,9 @@ window.insuranceListModule = (function () {
            data-start-date="${policy.startDate}"
            data-end-date="${policy.endDate}"
            data-policy-term="${policy.policyTerm}"
-           data-previous-insurance-coverage="${policy.previousInsuranceCoverage}"
+           data-previous-insurance-coverage="${
+             policy.previousInsuranceCoverage
+           }"
            data-no-claim-bonus="${policy.noClaimBonus}"
            data-porting-request="${policy.portingRequest}"
            data-payment-mode="${policy.paymentMode}"
@@ -565,7 +754,9 @@ window.insuranceListModule = (function () {
             <div class="flex items-center gap-2">
               <img src="/images/user.png" class="w-8 h-8 rounded-full" />
               <div>
-                <div class="text-sm font-medium text-gray-900">${policy.policyHolder}</div>
+                <div class="text-sm font-medium text-gray-900">${
+                  policy.policyHolder
+                }</div>
                 <div class="text-sm text-gray-500">${policy.email}</div>
               </div>
             </div>
@@ -575,7 +766,9 @@ window.insuranceListModule = (function () {
           <td class="p-2 border-b">₹${policy.premiumAmount.toLocaleString()}</td>
           <td class="p-2 border-b">₹${policy.coverageAmount.toLocaleString()}</td>
           <td class="p-2 border-b">
-            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">${policy.status}</span>
+            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">${
+              policy.status
+            }</span>
           </td>
         </tr>
       `);
@@ -589,17 +782,23 @@ window.insuranceListModule = (function () {
       .off("click.insuranceRow", ".employee-row")
       .on("click.insuranceRow", ".employee-row", handleRowClick);
 
-    $("#selectAll").off("change").on("change", function () {
-      $(".rowCheck").prop("checked", $(this).is(":checked")).trigger("change");
-    });
+    $("#selectAll")
+      .off("change")
+      .on("change", function () {
+        $(".rowCheck")
+          .prop("checked", $(this).is(":checked"))
+          .trigger("change");
+      });
 
     $("#closeSidebar").off("click").on("click", closeSidebar);
     $("#payrollSidebarOverlay").off("click").on("click", closeSidebar);
 
-    $(".sidebar-tab").off("click").on("click", function () {
-      const targetTab = $(this).data("tab");
-      setSidebarTab(targetTab);
-    });
+    $(".sidebar-tab")
+      .off("click")
+      .on("click", function () {
+        const targetTab = $(this).data("tab");
+        setSidebarTab(targetTab);
+      });
 
     const filterSidebar = document.getElementById("filterSidebar");
     const filterPanel = document.getElementById("filterPanel");
@@ -627,9 +826,9 @@ window.insuranceListModule = (function () {
 
   function handleRowClick(e) {
     if ($(e.target).closest(".rowCheck, a, i").length > 0) return;
-  
+
     const row = $(this).closest("tr");
-  
+
     state.selectedPolicy = {
       policyHolder: row.data("name"),
       email: row.data("email"),
@@ -638,7 +837,7 @@ window.insuranceListModule = (function () {
       premiumAmount: row.data("premium"),
       coverageAmount: row.data("coverage"),
       status: row.data("status"),
-  
+
       start_date: row.data("start-date"),
       end_date: row.data("end-date"),
       policy_term: row.data("policy-term"),
@@ -649,23 +848,21 @@ window.insuranceListModule = (function () {
       account_holder_name: row.data("account-holder-name"),
       bank_account_number: row.data("bank-account-number"),
       ifsc_code: row.data("ifsc-code"),
-  
+
       nominees: JSON.parse(row.attr("data-nominees") || "[]"),
       previousClaims: JSON.parse(row.attr("data-previous-claims") || "[]"),
     };
-  
+
     $("#payrollSidebarTitle").text(
       `Policy Insights for ${state.selectedPolicy.policyHolder} - ${state.selectedPolicy.policyNumber}`
     );
-  
+
     updatePolicyDetailsUI();
     getDetailclaimhistory();
     setSidebarTab("policyinformation");
-    
 
     openSidebar();
   }
-  
 
   function updatePolicyDetailsUI() {
     if (!state.selectedPolicy) return;
@@ -674,33 +871,44 @@ window.insuranceListModule = (function () {
     $("#detailEmail").text(state.selectedPolicy.email || "N/A");
     $("#detailPolicyNumber").text(state.selectedPolicy.policyNumber || "N/A");
     $("#detailPolicyType").text(state.selectedPolicy.policyType || "N/A");
-    $("#detailPremiumAmount").text("₹" + state.selectedPolicy.premiumAmount.toLocaleString());
-    $("#detailCoverageAmount").text("₹" + state.selectedPolicy.coverageAmount.toLocaleString());
+    $("#detailPremiumAmount").text(
+      "₹" + state.selectedPolicy.premiumAmount.toLocaleString()
+    );
+    $("#detailCoverageAmount").text(
+      "₹" + state.selectedPolicy.coverageAmount.toLocaleString()
+    );
     $("#detailPolicyStartDate").text(state.selectedPolicy.start_date || "N/A");
     $("#detailPolicyEndDate").text(state.selectedPolicy.end_date || "N/A");
     $("#detailPolicyTerm").text(state.selectedPolicy.policy_term || "N/A");
-    $("#detailPreviousInsuranceCoverage").text(state.selectedPolicy.previous_insurance_coverage || "N/A");
+    $("#detailPreviousInsuranceCoverage").text(
+      state.selectedPolicy.previous_insurance_coverage || "N/A"
+    );
     $("#detailNoClaimBonus").text(state.selectedPolicy.no_claim_bonus || "N/A");
-    $("#detailPortingRequest").text(state.selectedPolicy.porting_request || "N/A");
+    $("#detailPortingRequest").text(
+      state.selectedPolicy.porting_request || "N/A"
+    );
     $("#detailPaymentMode").text(state.selectedPolicy.payment_mode || "N/A");
-    $("#detailAccountHolderName").text(state.selectedPolicy.account_holder_name || "N/A");
-    $("#detailBankAccountNumber").text(state.selectedPolicy.bank_account_number || "N/A");
+    $("#detailAccountHolderName").text(
+      state.selectedPolicy.account_holder_name || "N/A"
+    );
+    $("#detailBankAccountNumber").text(
+      state.selectedPolicy.bank_account_number || "N/A"
+    );
     $("#detailIFSCCode").text(state.selectedPolicy.ifsc_code || "N/A");
 
     const nomineesContainer = $("#detailNominees");
     nomineesContainer.empty();
-    
+
     if (state.selectedPolicy.nominees.length === 0) {
       nomineesContainer.append("<li>No nominees added.</li>");
     } else {
-      state.selectedPolicy.nominees.forEach(n => {
+      state.selectedPolicy.nominees.forEach((n) => {
         nomineesContainer.append(
           `<li>${n.name} (${n.relation}) ${n.isPrimary ? "(Primary)" : ""}</li>`
         );
       });
     }
   }
- 
 
   function attachCheckboxEvents() {
     const selectAll = $("#selectAll");
@@ -709,7 +917,9 @@ window.insuranceListModule = (function () {
     function updateBadge() {
       const count = $(".rowCheck:checked").length;
       if (count > 0) {
-        badge.text(`${count} item${count > 1 ? "s" : ""} selected`).removeClass("hidden");
+        badge
+          .text(`${count} item${count > 1 ? "s" : ""} selected`)
+          .removeClass("hidden");
       } else {
         badge.addClass("hidden");
       }
@@ -718,7 +928,8 @@ window.insuranceListModule = (function () {
     $(".rowCheck")
       .off("change")
       .on("change", function () {
-        const allChecked = $(".rowCheck").length === $(".rowCheck:checked").length;
+        const allChecked =
+          $(".rowCheck").length === $(".rowCheck:checked").length;
         selectAll.prop("checked", allChecked);
         $(this)
           .closest("tr")
@@ -748,13 +959,14 @@ window.insuranceListModule = (function () {
       .removeClass("border-transparent text-gray-600")
       .addClass("border-[#009333] text-[#009333] bg-white");
 
-    $("#policyinformation, #policyenrollment, #claimhistory, #newclaimform").addClass("hidden");
+    $(
+      "#policyinformation, #policyenrollment, #claimhistory, #newclaimform"
+    ).addClass("hidden");
     $(`#${targetTab}`).removeClass("hidden");
 
-    if (targetTab === 'claimhistory') {
-    getDetailclaimhistory();
-  }
-    
+    if (targetTab === "claimhistory") {
+      getDetailclaimhistory();
+    }
   }
 
   return {
@@ -762,4 +974,3 @@ window.insuranceListModule = (function () {
     getInsuranceCount,
   };
 })();
-
