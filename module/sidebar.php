@@ -197,7 +197,7 @@
     </nav>
 
     <!-- Bottom User -->
-    <div class="absolute bottom-0 w-full border-t border-gray-600 py-2 px-3 flex items-center">
+    <div id="profileBar" class="absolute bottom-0 w-full border-t border-gray-600 py-2 px-3 flex items-center cursor-pointer">
         <img src="/images/man-profile.jpg" class="w-10 h-10 rounded-full mr-3 object-cover bg-gray-200" />
 
         <div class="text-[#b0b3b7]">
@@ -208,4 +208,80 @@
         <i class="ri-expand-up-down-fill ml-auto text-[#b0b3b7] cursor-pointer"></i>
     </div>
 
+<div id="profileDropdown" 
+     class="absolute left-[200px] bottom-2  ml-2 w-[300px] p-2 bg-white rounded-xl shadow-[0_4px_16px_#27313a66] z-50 hidden">
+
+  <!-- User Info -->
+<div class="px-2 py-1.5 flex items-center">
+  <div class="mr-3">
+    <div class="bg-gray-200 rounded-full w-11 h-11 flex items-center justify-center overflow-hidden">
+      <img src="/images/man-profile.jpg" alt="User Profile" class="w-full h-full object-cover">
+    </div>
+  </div>
+
+  <div class="flex-1">
+    <div class="flex flex-col w-full">
+
+      <!-- Name + Role -->
+      <div class="flex items-center w-full">
+        <div class="font-semibold text-gray-900 text-[15px]">Dinesh G</div>
+        <div class="ml-auto px-2 py-0.5 text-[11px] font-medium text-green-700 bg-green-100 rounded-full">
+          Admin
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="text-[13px] text-gray-500 mt-0.5">
+        dinesh@example.com
+      </div>
+
+    </div>
+  </div>
 </div>
+
+
+  <!-- Dropdown Items -->
+  <ul class="py-2">
+    <hr class="border-t border-gray-200">
+
+    <li class="flex items-center px-2 py-1.5 mt-1 hover:bg-gray-100 rounded-md cursor-pointer">
+      <i class="ri-line-chart-line mr-3 text-gray-600"></i>
+      <span class="text-[14px] text-gray-800">Activity</span>
+    </li>
+
+    <li class="flex items-center px-2 py-1.5 mb-1 hover:bg-gray-100 rounded-md cursor-pointer">
+      <i class="ri-admin-line mr-3 text-gray-600"></i>
+      <span class="text-[14px] text-gray-800">Admin Console</span>
+    </li>
+
+    <li class="flex items-center px-2 py-1.5 mb-1 hover:bg-gray-100 rounded-md cursor-pointer">
+      <i class="ri-settings-3-line mr-3 text-gray-600"></i>
+      <span class="text-[14px] text-gray-800">Profile Settings</span>
+    </li>
+
+    <hr class="border-t border-gray-200">
+
+    <li class="flex items-center px-2 py-1.5 mt-1 hover:bg-gray-100 rounded-md cursor-pointer">
+      <i class="ri-add-circle-line mr-3 text-gray-600"></i>
+      <span class="text-[14px] text-gray-800">Add Account</span>
+    </li>
+
+    <li class="flex items-center px-2 py-1.5 hover:bg-gray-100 rounded-md cursor-pointer">
+      <i class="ri-logout-box-line mr-3 text-gray-600"></i>
+      <span class="text-[14px] text-gray-800">Logout</span>
+    </li>
+  </ul>
+
+  <!-- Footer -->
+  <div class="px-2 py-1 text-xs text-gray-500 flex items-center">
+    <span>v.1.5.69</span>
+    <span class="text-[10px] ml-1">•</span>
+    <a href="#" class="ml-1 text-gray-500">Terms & Conditions</a>
+  </div>
+</div>
+
+
+</div>
+
+
+<script src="/module/sidebar.js"></script>
