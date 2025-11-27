@@ -201,7 +201,7 @@
       const rightSpan = document.createElement("span");
       rightSpan.className = "cursor-pointer";
       rightSpan.innerHTML =
-        '<i class="ri-pencil-fill edit-icon opacity-0 group-hover:opacity-100"></i>';
+        '<i class="ri-pencil-fill p-1 rounded border border-[#cfd7df] text-[#4d5e6c] opacity-0 group-hover:opacity-100"></i>';
       wrapper.appendChild(leftSpan);
       wrapper.appendChild(centerSpan);
       wrapper.appendChild(rightSpan);

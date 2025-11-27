@@ -792,14 +792,14 @@ function renderDepartmentTable() {
       const actionButtons = `
         <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
           <span class="edit-department cursor-pointer" data-dept-id="${dept.id}">
-            <i class="ri-pencil-fill edit-icon"></i>
+            <i class="ri-pencil-fill p-1 rounded border border-[#cfd7df] text-[#4d5e6c]"></i>
           </span>
           <span class="delete-department cursor-pointer" data-dept-id="${dept.id}">
-            <i class="ri-delete-bin-line text-red-600 edit-icon"></i>
+            <i class="ri-delete-bin-line text-red-600 p-1 rounded border border-[#cfd7df] text-[#4d5e6c]"></i>
           </span>
         </div>`;
       const rowHtml = `
-        <tr class="tr-hover group relative" data-dept-id="${dept.id}">
+        <tr class="hover:bg-[#f5f7f9] text-sm cursor-pointer group relative" data-dept-id="${dept.id}">
           <td class="border-r border-[#ebeff3] p-[0.3rem] text-center">${index + 1}</td>
           <td class="border-r border-[#ebeff3] p-[0.3rem]">
             <div class="flex items-center justify-between text-[#475867] font-medium">
@@ -830,10 +830,10 @@ function renderDepartmentTable() {
             <span>${escapeHtml(dept.name)}</span>
             <div class="flex items-center gap-2 absolute right-0 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-150">
               <span class="edit-department cursor-pointer" data-dept-id="${dept.id}">
-                <i class="ri-pencil-fill edit-icon"></i>
+                <i class="ri-pencil-fill p-1 rounded border border-[#cfd7df] text-[#4d5e6c]"></i>
               </span>
               <span class="delete-department cursor-pointer" data-dept-id="${dept.id}">
-                <i class="ri-delete-bin-line text-red-600 edit-icon"></i>
+                <i class="ri-delete-bin-line text-red-600 p-1 rounded border border-[#cfd7df] text-[#4d5e6c]"></i>
               </span>
             </div>
           </div>`
@@ -842,15 +842,15 @@ function renderDepartmentTable() {
             <span class="text-[#475867] font-medium">${escapeHtml(dept.name)}</span>
             <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
               <span class="edit-department cursor-pointer" data-dept-id="${dept.id}">
-                <i class="ri-pencil-fill edit-icon"></i>
+                <i class="ri-pencil-fill p-1 rounded border border-[#cfd7df] text-[#4d5e6c]"></i>
               </span>
               <span class="delete-department cursor-pointer" data-dept-id="${dept.id}">
-                <i class="ri-delete-bin-line text-red-600 edit-icon"></i>
+                <i class="ri-delete-bin-line text-red-600 p-1 rounded border border-[#cfd7df] text-[#4d5e6c]"></i>
               </span>
             </div>
           </div>`;
     const rowHtml = `
-      <tr class="tr-hover group relative" data-dept-id="${dept.id}">
+      <tr class="hover:bg-[#f5f7f9] text-sm cursor-pointer group relative" data-dept-id="${dept.id}">
         <td class="border-r border-[#ebeff3] p-[0.3rem] text-center">${
           index + 1
         }</td>
@@ -1212,10 +1212,10 @@ function renderSubDepartmentCard(deptId, anchorEl) {
           </div>
           <div class="flex items-center gap-2 absolute right-2 opacity-0 group-hover/sub:opacity-100 transition-opacity duration-200">
             <span class="cursor-pointer" data-action="edit-sub" data-dept-id="${deptId}" data-sub-index="${index}">
-              <i class="ri-pencil-fill edit-icon"></i>
+              <i class="ri-pencil-fill p-1 rounded border border-[#cfd7df] text-[#4d5e6c]"></i>
             </span>
             <span class="cursor-pointer" data-action="delete-sub" data-dept-id="${deptId}" data-sub-index="${index}">
-              <i class="ri-delete-bin-line text-red-600 edit-icon"></i>
+              <i class="ri-delete-bin-line text-red-600 p-1 rounded border border-[#cfd7df] text-[#4d5e6c]"></i>
             </span>
           </div>
         </li>
