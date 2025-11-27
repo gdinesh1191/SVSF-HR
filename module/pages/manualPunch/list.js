@@ -498,6 +498,18 @@ function closeSidebarCustomTable () {
     
 };
 
+$(document).on("click", function (e) {
+    if (!$(e.target).closest("#customizeSidebar").length && !$(e.target).is("#openCustomizeSidebar")) {
+        closeSidebarCustomTable();
+    }
+});
+
+// Prevent clicks inside sidebar from closing it
+$("#customizeSidebar").on("click", function (e) {
+    e.stopPropagation();
+});
+
+
 $("#closeCustomizeTableSidebarBtn, #cancelSidebarBtnCustomTable").on("click", closeSidebarCustomTable);
 
 
