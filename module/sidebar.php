@@ -256,7 +256,7 @@
 
     <li class="flex items-center px-2 py-1.5 mb-1 hover:bg-gray-100 rounded-md cursor-pointer">
       <i class="ri-settings-3-line mr-3 text-gray-600"></i>
-      <span class="text-[14px] text-gray-800">Profile Settings</span>
+      <a href="/app/profile" class="text-[14px] text-gray-800">Profile Settings</a>
     </li>
 
     <hr class="border-t border-gray-200">
