@@ -236,7 +236,9 @@ $(document).ready(function () {
 
         manualPunchList.forEach((e, index) => {
             rows += `
-        <tr class="hover:bg-[#f5f7f9] text-sm cursor-pointer divide-x divide-[#ebeff3] group">
+        <tr class="mspRow hover:bg-[#f5f7f9] text-sm cursor-pointer divide-x divide-[#ebeff3] group"
+    data-id="${index}">
+
 
             <td class="p-2 border-b border-[#ebeff3]">
                 <input type="checkbox" class="rowCheck cursor-pointer accent-green-600">
@@ -435,6 +437,85 @@ $(document).ready(function () {
 
 
 
+$(document).on("click", ".mspRow", function () {
+     $("#customizeSidebar").removeClass("translate-x-0").addClass("translate-x-full");
+    const rowIndex = $(this).data("id");
+    const rowData = manualPunchList[rowIndex];
+    openSidebarWithData(rowData);
+});
+
+$(document).on("click", ".ri-pencil-fill", function (e) {
+    e.stopPropagation();
+});
+
+$(document).on("click", ".rowCheck", function (e) {
+    e.stopPropagation();
+});
+
+
+
+function openSidebarWithData(data) {
+
+    // Fill values
+    $("#sidebarEmployeeName").val(data.employeeName);
+    $("#sidebarEmployeeCode").val(data.employeeCode);
+    $("#sidebarDepartment").val(data.department);
+    $("#sidebarSubDepartment").val(data.subDepartment);
+    $("#sidebarDate").val(data.date);
+    $("#sidebarRemarks").val(data.remarks);
+
+    // Time fields (editable)
+    $("#sidebarInTime").val(data.inTime);
+    $("#sidebarOutTime").val(data.outTime);
+
+    // Open sidebar
+    $("#rowSidebarWrapper").removeClass("opacity-0 pointer-events-none");
+    $("#rowSidebar").removeClass("translate-x-full");
+}
+
+
+function closeSidebar() {
+    $("#rowSidebarWrapper").addClass("opacity-0 pointer-events-none");
+    $("#rowSidebar").addClass("translate-x-full");
+}
+
+$("#closeSidebarBtn, #cancelSidebarBtn, #overlayBg").on("click", closeSidebar);
+
+
+
+// OPEN sidebar
+$("#openCustomizeSidebar").on("click", function () {
+    $("#customizeSidebar").removeClass("translate-x-full")
+                          .addClass("translate-x-0");
+    
+
+});
+
+// CLOSE sidebar
+function closeSidebarCustomTable () {
+    $("#customizeSidebar").removeClass("translate-x-0")
+                          .addClass("translate-x-full");
+    
+};
+
+$("#closeCustomizeTableSidebarBtn, #cancelSidebarBtnCustomTable").on("click", closeSidebarCustomTable);
+
+
+
+ // Open sidebar
+        $("#openFilterBtn").on("click", function() {
+            $("#filterSidebarWrapper").removeClass("opacity-0 pointer-events-none").addClass("opacity-100 pointer-events-auto");
+            $("#filterSidebar").removeClass("translate-x-full").addClass("translate-x-0");
+        });
+
+        // Close sidebar
+        function closeFilterSidebar() {
+            $("#filterSidebarWrapper").removeClass("opacity-100 pointer-events-auto").addClass("opacity-0 pointer-events-none");
+            $("#filterSidebar").removeClass("translate-x-0").addClass("translate-x-full");
+        }
+
+        $("#closeFilterBtn, #filterBackdrop").on("click", closeFilterSidebar);
+
 
     // ▟ Tab switch logic
     $(".tab").click(function () {
@@ -460,9 +541,37 @@ $(document).ready(function () {
         // Decide which content to load
         let tabName = $(this).data("tab");
 
-        if (tabName === "list") loadListTable();
-        else loadNewForm();
+        if (tabName === "list") {
+            $("#listTopBar")
+                .removeClass("hidden")
+                .addClass("flex");
+
+            $("#contentBox")
+                .removeClass("mt-2 h-[calc(100vh-154px)]")
+                .addClass("h-[calc(100vh-189px)]");
+
+
+            loadListTable();
+        } else {
+            $("#listTopBar")
+                .addClass("hidden")
+                .removeClass("flex");
+
+            $("#contentBox")
+                .removeClass("h-[calc(100vh-189px)]")
+                .addClass("mt-2 h-[calc(100vh-154px)]");
+
+
+            loadNewForm();
+        }
     });
+
+
+    if ($(".tab.active-tab").data("tab") === "list") {
+        $("#listTopBar")
+            .removeClass("hidden")
+            .addClass("flex");
+    }
 
     // Default active tab on load
     loadListTable();
