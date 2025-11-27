@@ -153,6 +153,42 @@
                 </div>
 
             </li>
+            <li class="px-4 py-2.5 flex items-center justify-between text-[#b0b3b7] 
+                        hover:bg-[#191f26] border-l-4 border-l-transparent hover:border-l-[#1aed59]">
+
+                <div class="flex items-center">
+                    <i class="ri-history-line mr-3"></i>
+                    <a href="/app/punchData" class="flex-1 block">Punch Data</a>
+                </div>
+
+            </li>
+            <li class="px-4 py-2.5 flex items-center justify-between text-[#b0b3b7] 
+                        hover:bg-[#191f26] border-l-4 border-l-transparent hover:border-l-[#1aed59]">
+
+                <div class="flex items-center">
+                    <i class="ri-calendar-event-line mr-3"></i>
+                    <a href="/app/leave" class="flex-1 block">Leave</a>
+                </div>
+
+            </li>
+            <li class="px-4 py-2.5 flex items-center justify-between text-[#b0b3b7] 
+                        hover:bg-[#191f26] border-l-4 border-l-transparent hover:border-l-[#1aed59]">
+
+                <div class="flex items-center">
+                    <i class="ri-repeat-line mr-3"></i>
+                    <a href="/app/shiftChange" class="flex-1 block">Shift Change</a>
+                </div>
+
+            </li>
+            <li class="px-4 py-2.5 flex items-center justify-between text-[#b0b3b7] 
+                        hover:bg-[#191f26] border-l-4 border-l-transparent hover:border-l-[#1aed59]">
+
+                <div class="flex items-center">
+                    <i class="ri-group-line mr-3"></i>
+                    <a href="/app/myTeam" class="flex-1 block">My Team</a>
+                </div>
+
+            </li>
 
 
              <li id="othersMenu" class="px-4 py-2.5 flex items-center justify-between text-[#b0b3b7] cursor-pointer 

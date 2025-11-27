@@ -62,6 +62,25 @@ switch ($_GET["pl"]) {
     }
         break;
 
+     case "punchData": {
+       require 'pages/punchData/list.php';
+    }
+        break;
+
+     case "leave": {
+       require 'pages/leave/list.php';
+    }
+        break;
+     case "shiftChange": {
+       require 'pages/shiftChange/list.php';
+    }
+        break;
+
+     case "myTeam": {
+       require 'pages/myTeam/list.php';
+    }
+        break;
+
      case "notification": {
        require 'pages/notification/list.php';
     }
