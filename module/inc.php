@@ -71,6 +71,10 @@ switch ($_GET["pl"]) {
        require 'pages/event/event.php';
     }
         break;
+    case "profile": {
+            require 'pages/profile/profile.php';
+         }
+             break;
 
     default:
         require 'pages/dashboard/index.php';
