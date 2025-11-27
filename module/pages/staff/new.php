@@ -16,10 +16,10 @@
                     <div class="sm:w-2/3 w-full flex gap-2">
                         <select
                             class="h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] text-sm placeholder:text-[#585858] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333]  w-30 ">
-                            <option>Select</option>
-                            <option selected>Mr.</option>
-                            <option>Mrs.</option>
-                            <option>Ms.</option>
+                            <option value="">Select</option>
+                        <option value="mr">Mr.</option>
+                        <option value="mrs">Mrs.</option>
+                        <option value="ms">Ms.</option>
                         </select>
                         <input type="text" placeholder="Enter first Name"
                             class="h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] text-sm placeholder:text-[#585858] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333] w-full " />
@@ -196,8 +196,7 @@
                         <i class="ri-upload-line"></i>
                         <span>Upload File</span>
                     </button>
-                    <input type="file" id="fileInput" class="hidden" multiple>
-
+                    <input type="file" id="hiddenFileInput" class="hidden" multiple>
 
                 </div>
 
@@ -567,7 +566,7 @@
                                 </td>
 
                                 <td class="p-2 border-r border-b border-[#ebeff3]">
-                                    <input type="text" id="age" class="h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] 
+                                    <input type="text" placeholder="Auto fill" id="age" class="h-[35px] px-[0.75rem] py-[0.375rem] text-[#212529] 
                     text-sm placeholder:text-[#585858] bg-white border border-[#cbcbcb] 
                     rounded-md leading-[1.5] focus:outline-none focus:border-[#009333] 
                      w-full" disabled>
@@ -614,7 +613,7 @@
                                 </td>
 
                                 <td class="p-2 text-center  border-b border-[#ebeff3]">
-                                    <button id="saveBtn"
+                                    <button id="saveBtn" type="button"
                                         class="px-3 py-1.5 bg-green-600 text-white rounded hover:bg-green-700">
                                         Save
                                     </button>
@@ -629,21 +628,20 @@
                     <div class="mt-4 max-h-[350px] overflow-y-auto  rounded">
                         <table class="w-full text-sm" id="familyTable">
 
-                            <thead id="savedHeader" class="bg-gray-100 text-[#12344d] sticky-header hidden">
+                            <thead id="savedHeader" class="bg-[#f8f9fa] text-left text-[#12344d] text-[12px] sticky top-0 z-10 border-b border-[#ebeff3] hidden">
                                 <tr>
-                                    <th class="p-2">S.no</th>
-                                    <th class="p-2">Name</th>
-                                    <th class="p-2">DOB</th>
-                                    <th class="p-2">Age</th>
-                                    <th class="p-2">Relationship</th>
-                                    <th class="p-2">Phone</th>
-                                    <th class="p-2">Occupation</th>
-                                    <th class="p-2">Aadhaar</th>
+                                    <th class="p-2 border-r border-[#ebeff3]">S.no</th>
+                                    <th class="p-2 border-r border-[#ebeff3]">Name</th>
+                                    <th class="p-2 border-r border-[#ebeff3]">Date of Birth</th>
+                                    <th class="p-2 border-r border-[#ebeff3]">Age</th>
+                                    <th class="p-2 border-r border-[#ebeff3]">Relationship Type</th>
+                                    <th class="p-2 border-r border-[#ebeff3]">Phone Number</th>
+                                    <th class="p-2 border-r border-[#ebeff3]">Occupation</th>
+                                    <th class="p-2 border-r border-[#ebeff3]">Aadhaar Number</th>
                                     <th class="p-2 text-center">Actions</th>
                                 </tr>
                             </thead>
-
-
+                    
                             <tbody id="familyBody">
                             </tbody>
 
@@ -717,12 +715,105 @@
 
         </div>
 
+
+        <div id="attachmentModal" 
+     class="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 hidden">
+
+  <div class="bg-white rounded-lg w-[80%] h-full max-h-[calc(100vh-30px)] flex flex-col">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center p-4 border-b">
+      <h2 class="text-lg font-semibold">Attachments</h2>
+
+      <button id="closeModalBtn" type="button" class="text-gray-500 hover:text-gray-700">
+        <i class="ri-close-line text-xl"></i>
+      </button>
+    </div>
+
+    <div class="overflow-y-auto flex-1 p-4">
+
+      <!-- Upload Area -->
+      <div id="uploadBox"
+           class="bg-white rounded-xl p-6 shadow-md border border-dashed border-gray-300
+                  text-center mb-6 cursor-pointer hover:border-green-400 hover:bg-gray-50">
+
+        <div class="flex flex-col items-center space-y-3">
+          <div class="text-4xl text-green-500">
+            <i class="ri-upload-cloud-2-line"></i>
+          </div>
+
+          <p class="text-black font-semibold">Click here to upload files</p>
+          <p class="text-gray-400 text-sm">
+            Supported Format: SVG, JPG, PNG, PDF (10mb each)
+          </p>
+        </div>
+      </div>
+
+      <!-- File List -->
+      <div class="bg-white rounded-xl shadow-md p-4">
+        <div class="flex justify-between items-center mb-4">
+  <div class="text-gray-700 font-semibold">
+    Attached Files 
+    <span id="fileCount" class="text-xs bg-[#009333] text-white px-2 py-1 rounded-full">0</span>
+  </div>
+
+  <div class="flex items-center relative space-x-2">
+    <input 
+      id="searchInput" 
+      class="h-[31px] px-[0.75rem] py-[0.375rem] text-[#212529] text-sm placeholder:text-[#585858] bg-white border border-[#cbcbcb] rounded-md leading-[1.5] focus:outline-none focus:border-[#009333] w-full" 
+      type="text" 
+      placeholder="Search files..."
+    />
+
+    <!-- Filter Button -->
+    <button 
+      id="filterBtn"
+      type="button"
+      class="py-1 px-2 text-sm rounded cursor-pointer text-[#384551] hover:bg-[#dce0e5]"
+    >
+      <i class="ri-filter-3-line"></i>
+    </button>
+  </div>
+</div>
+
+
+        <div class="max-h-[calc(100vh-385px)] overflow-y-auto">
+  <table class="w-full text-sm text-left border-collapse">
+
+    <thead class="text-gray-500 shadow-[0_1px_0_0_#ebeff3] bg-gray-50 sticky top-0 z-10">
+      <tr>
+        <th class="px-2 py-2 text-xs font-medium border-r border-[#ebeff3]">File Name</th>
+        <th class="px-2 py-2 text-xs font-medium border-r border-[#ebeff3]">File Size</th>
+        <th class="px-2 py-2 text-xs font-medium border-r border-[#ebeff3]">Last Modified</th>
+        <th class="px-2 py-2 text-xs font-medium border-r border-[#ebeff3]">Uploaded By</th>
+        <th class="px-2 py-2 text-xs font-medium text-center ">Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="fileTableBody">
+      <!-- Rows added here -->
+    </tbody>
+  </table>
+</div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
     </form>
+
+
+
+
 
 
 </div>
 <footer class="px-4 h-[56px] bg-[#ebeff3] flex items-center justify-start gap-2">
-    <button id="saveBtn"
+    <button id="formsaveBtn"
         class="py-1.5 px-2 text-sm rounded border cursor-pointer bg-[#009333] text-white border-[#009333] hover:bg-[#007a2a] transition">
         Save
     </button>
