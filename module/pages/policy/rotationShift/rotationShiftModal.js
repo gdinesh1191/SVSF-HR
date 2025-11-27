@@ -80,11 +80,11 @@ function renderShiftAllocationTab() {
     for (let i = 0; i < 10; i++) {
       rowsHtml += `
         <tr class="animate-pulse table w-full">
-          <td class="td-cell"><div class="h-4 bg-gray-200 rounded"></div></td>
-          <td class="td-cell"><div class="h-4 bg-gray-200 rounded"></div></td>
-          <td class="td-cell"><div class="h-4 bg-gray-200 rounded"></div></td>
-          <td class="td-cell"><div class="h-4 bg-gray-200 rounded"></div></td>
-          <td class="td-cell"><div class="h-4 bg-gray-200 rounded"></div></td>
+          <td class="border-r border-b border-[#ebeff3] p-[0.3rem]"><div class="h-4 bg-gray-200 rounded"></div></td>
+          <td class="border-r border-b border-[#ebeff3] p-[0.3rem]"><div class="h-4 bg-gray-200 rounded"></div></td>
+          <td class="border-r border-b border-[#ebeff3] p-[0.3rem]"><div class="h-4 bg-gray-200 rounded"></div></td>
+          <td class="border-r border-b border-[#ebeff3] p-[0.3rem]"><div class="h-4 bg-gray-200 rounded"></div></td>
+          <td class="border-r border-b border-[#ebeff3] p-[0.3rem]"><div class="h-4 bg-gray-200 rounded"></div></td>
         </tr>
       `;
     }

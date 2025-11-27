@@ -155,7 +155,7 @@
       const editSpan = document.createElement("span");
       editSpan.className = "cursor-pointer";
       editSpan.innerHTML =
-        '<i class="ri-pencil-fill edit-icon opacity-0 group-hover:opacity-100"></i>';
+        '<i class="ri-pencil-fill p-1 rounded border border-[#cfd7df] text-[#4d5e6c] opacity-0 group-hover:opacity-100"></i>';
       editSpan.addEventListener("click", () => {
         showToast("Edit clicked for ID " + ev.id, "info");
       });

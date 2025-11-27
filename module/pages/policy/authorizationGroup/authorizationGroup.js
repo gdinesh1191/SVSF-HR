@@ -316,7 +316,7 @@ function bindAuthGroupEvents() {
   });
 
   // Edit icon click
-  $(document).on("click", ".auth-group-edit-icon", function () {
+  $(document).on("click", ".auth-group-p-1 rounded border border-[#cfd7df] text-[#4d5e6c]", function () {
     const id = parseInt($(this).data("id"));
     handleAuthorizationEdit(id);
   });
@@ -802,7 +802,7 @@ function renderTable() {
           <div class="flex justify-between items-center">
             <span></span>
             <span class="text-center">${index + 1}</span>
-            <span class="cursor-pointer auth-group-edit-icon" data-id="${Staff.id}">
+            <span class="cursor-pointer auth-group-p-1 rounded border border-[#cfd7df] text-[#4d5e6c]" data-id="${Staff.id}">
               <i class="ri-pencil-fill p-1 rounded border border-[#cfd7df] text-[#4d5e6c] opacity-0 group-hover:opacity-100"></i>
             </span>
           </div>
