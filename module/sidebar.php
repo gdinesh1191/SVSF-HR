@@ -251,7 +251,7 @@
 
     <li class="flex items-center px-2 py-1.5 mb-1 hover:bg-gray-100 rounded-md cursor-pointer">
       <i class="ri-admin-line mr-3 text-gray-600"></i>
-      <span class="text-[14px] text-gray-800">Admin Console</span>
+      <a href="/app/settings" class="text-[14px] text-gray-800">Admin Console</a>
     </li>
 
     <li class="flex items-center px-2 py-1.5 mb-1 hover:bg-gray-100 rounded-md cursor-pointer">

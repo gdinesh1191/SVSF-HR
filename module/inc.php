@@ -75,6 +75,10 @@ switch ($_GET["pl"]) {
             require 'pages/profile/profile.php';
          }
              break;
+    case "settings": {
+                require 'pages/settings/settings.php';
+             }
+                 break;
 
     default:
         require 'pages/dashboard/index.php';

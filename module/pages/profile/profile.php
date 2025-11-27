@@ -2,7 +2,7 @@
 <div class="flex h-screen bg-gray-100">
 
   <!-- Sidebar -->
-  <aside class="w-[240px] bg-[#f8f9fa] border-r border-[#ebeff3] p-3 flex flex-col">
+  <aside class="w-[240px] bg-[#f8f9fa] p-3 flex flex-col">
     <h1 class="text-[18px] font-medium text-[#009333] mb-2">Profile Settings</h1>
 
     <!-- Search -->
