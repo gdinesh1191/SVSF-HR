@@ -553,7 +553,7 @@
 
                             </label>
                             <button type="submit"
-                                class="w-2/3 w-full px-2 py-2 text-sm  rounded-lg bg-[#009333] text-white border border-[#009333] hover:bg-[#007a2a] transition" />
+                                class="w-2/3 w-full px-2 py-2 text-sm  rounded bg-[#009333] text-white border border-[#009333] hover:bg-[#007a2a] transition" />
                             Save
                             </button>
                         </div>

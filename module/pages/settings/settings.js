@@ -53,16 +53,15 @@ const settingCategories = [
     });
   }
   
-  // Render main content
   function renderContent() {
-    const fnName = componentMap[activeSetting] || null;
-    const componentFn = fnName && window[fnName] ? window[fnName] : () => `<p class="text-gray-500">Component not found</p>`;
+    const fnName = componentMap[activeSetting];
+    const componentFn = fnName && window[fnName] ? window[fnName] : () => `<p>Component not found</p>`;
     mainContent.innerHTML = componentFn();
   
-    // Delay logic binding until after component is injected
-    const logicFn = fnName && window[fnName + "Logic"] ? window[fnName + "Logic"] : null;
-    if (logicFn) setTimeout(() => logicFn(), 0); // ensures DOM exists
+    const logicFn = fnName && window[fnName+"Logic"] ? window[fnName+"Logic"] : null;
+    if (logicFn) requestAnimationFrame(() => logicFn());
   }
+  
   
   // Search handler
   searchInput.addEventListener("input", e => {
